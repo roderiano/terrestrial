@@ -10,7 +10,9 @@ public class SkillScriptableObject : ScriptableObject
     [TextArea]
     public string description;
 
-    [Header("Attributes")]
+    [Header("Attributes Hability")]
+    [Range(0, 10)]
+    public int cost;
     [Range(-10, 10)]
     public int speed;
     [Range(-10, 10)]
@@ -19,6 +21,7 @@ public class SkillScriptableObject : ScriptableObject
     public int stealth;
     [Range(-10, 10)]
     public int vitality;
+
 
     [Header("Special Hability")]
     public SkillSpecialHability specialHability = SkillSpecialHability.None;

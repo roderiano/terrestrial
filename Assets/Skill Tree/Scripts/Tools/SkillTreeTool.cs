@@ -4,10 +4,6 @@ using System.Linq;
 
 public class CreateTool
 {
-
-    float horizontal = 0f;
-    float vertical = 0f;
-
     [MenuItem("Terrestrial/Skill Tree/Create Skill Node")]
     static void CreateSkillNode()
     {

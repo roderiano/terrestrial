@@ -15,6 +15,7 @@ MonoBehaviour:
   title: Savage Soul
   icon: {fileID: 0}
   description: This hability enable your savage instinct.
+  cost: 0
   speed: 2
   health: 0
   stealth: 1

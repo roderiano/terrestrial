@@ -9,11 +9,13 @@ public class SkillTreeManager : MonoBehaviour
 
     void Start()
     {
+        // Configure line redenderes relation
         CreateLinesRelation();
     }
 
     void Update()
     {
+
         RefreshTreeSkill();
     }
 
@@ -21,6 +23,7 @@ public class SkillTreeManager : MonoBehaviour
     {
         foreach (Transform child in transform)
         {
+            //Draw lines and your childrens
             DrawLine(child);
         }
     }
@@ -31,10 +34,11 @@ public class SkillTreeManager : MonoBehaviour
         {
             if (child.tag == "Skill Node")
             {
-                NodeConnectionRefresh childConnectionLine = child.gameObject.AddComponent<NodeConnectionRefresh>();
-                childConnectionLine.SetRootNode(node.gameObject);
-                childConnectionLine.lineMaterial = lineMaterial;
-                childConnectionLine.skill = child.GetComponent<Skill>();
+                // Configure the line connection refresh
+                NodeLineConnectionRefresh childNodeLineConnectionRefresh = child.gameObject.AddComponent<NodeLineConnectionRefresh>();
+                childNodeLineConnectionRefresh.SetRootNode(node.gameObject);
+                childNodeLineConnectionRefresh.SetLineMaterial(lineMaterial);
+                childNodeLineConnectionRefresh.SetSkill(child.GetComponent<Skill>());
                 DrawLine(child);
             }
         }
@@ -44,6 +48,7 @@ public class SkillTreeManager : MonoBehaviour
     {
         foreach (Transform child in transform)
         {
+            // Refresh skill status of children by status of root node
             RefreshNode(child);
         }
     }
