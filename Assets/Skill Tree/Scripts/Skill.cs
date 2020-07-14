@@ -1,48 +1,29 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class Skill : MonoBehaviour
+[CreateAssetMenu(fileName = "Skill", menuName = "ScriptableObjects/Skill")]
+public class Skill : ScriptableObject
 {
+    [Header("Skill Info")]
+    public string title;
+    public Image icon;
+    [TextArea]
+    public string description;
 
-    [SerializeField] private SkillScriptableObject skill;
-    [SerializeField] private SkillStatus status = SkillStatus.Blocked;
-    private Image buttonImage;
+    [Header("Attributes Hability")]
+    [Range(0, 10)]
+    public int cost;
+    [Range(-10, 10)]
+    public int speed;
+    [Range(-10, 10)]
+    public int health;
+    [Range(-10, 10)]
+    public int stealth;
+    [Range(-10, 10)]
+    public int vitality;
 
-    private void Start()
-    {
-        buttonImage = transform.Find("NodeButton").GetComponent<Image>();
-    }
 
-    void Update()
-    {
-        RefreshButtonColor();
-    }
+    [Header("Special Hability")]
+    public SkillSpecialHability specialHability = SkillSpecialHability.None;
 
-    public void SetStatus(SkillStatus status)
-    {
-        this.status = status;
-    }
-
-    public SkillStatus GetStatus()
-    {
-        return status;
-    }
-
-    void RefreshButtonColor()
-    {
-        switch (GetStatus())
-        {
-            case SkillStatus.Adquired:
-                buttonImage.color = Color.green;
-                break;
-            case SkillStatus.Available:
-                buttonImage.color = Color.white;
-                break;
-            case SkillStatus.Blocked:
-                buttonImage.color = Color.red;
-                break;
-        }
-    }
 }

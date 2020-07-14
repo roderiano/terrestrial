@@ -6,7 +6,7 @@ public class NodeLineConnectionRefresh : MonoBehaviour
 {
 
     private float lineWidth;
-    private Skill skill;
+    private SkillNode skill;
     private GameObject rootNode;
     private Vector3[] nodesPoints;
     private Material lineMaterial;
@@ -38,15 +38,15 @@ public class NodeLineConnectionRefresh : MonoBehaviour
             // Refresh color of line by skill status
             switch (skill.GetStatus())
             {
-                case SkillStatus.Adquired:
+                case SkillNodeStatus.Adquired:
                     lineRenderer.endColor = Color.green;
                     lineRenderer.startColor = Color.green;
                     break;
-                case SkillStatus.Available:
+                case SkillNodeStatus.Available:
                     lineRenderer.endColor = Color.white;
                     lineRenderer.startColor = Color.white;
                     break;
-                case SkillStatus.Blocked:
+                case SkillNodeStatus.Blocked:
                     lineRenderer.endColor = Color.red;
                     lineRenderer.startColor = Color.red;
                     break;
@@ -64,7 +64,7 @@ public class NodeLineConnectionRefresh : MonoBehaviour
         lineMaterial = material;
     }
 
-    public void SetSkill(Skill skill)
+    public void SetSkill(SkillNode skill)
     {
         this.skill = skill;
     }

@@ -1,4 +1,4 @@
-﻿public enum SkillStatus {
+﻿public enum SkillNodeStatus {
     None,
     Adquired,
     Available,

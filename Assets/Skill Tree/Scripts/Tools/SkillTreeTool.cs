@@ -7,7 +7,7 @@ public class CreateTool
     [MenuItem("Terrestrial/Skill Tree/Create Skill Node")]
     static void CreateSkillNode()
     {
-        Object nodePrefab = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Skill Tree/Node.prefab", typeof(GameObject));
+        Object nodePrefab = AssetDatabase.LoadAssetAtPath("Assets/Skill Tree/Prefabs/Node.prefab", typeof(GameObject));
         GameObject go = PrefabUtility.InstantiatePrefab(nodePrefab) as GameObject;
 
         if (go != null)
