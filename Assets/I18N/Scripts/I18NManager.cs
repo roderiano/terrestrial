@@ -7,11 +7,13 @@ public class I18NEntity
 {
     public Object obj;
     public string token;
+    public string attribute;
 
-    public I18NEntity(Object obj, string token)
+    public I18NEntity(Object obj, string token, string attribute = null)
     {
         this.obj = obj;
         this.token = token;
+        this.attribute = attribute;
     }
 }
 
@@ -26,16 +28,27 @@ public class I18NManager : MonoBehaviour
         RefreshSceneTranslation(Language.Portuguese);
     }
 
+    void Update() 
+    {
+        if(Input.GetKeyDown(KeyCode.Space))
+            RefreshSceneTranslation(Language.English);   
+    }
+
     // Find all I18NEntity in scene when start
     void FindAllEntities() 
     {
         List<Object> objects = new List<Object>();
         
         // Get all object of type Text and add to list of objects
-        Object[] arrayObjects = FindObjectsOfType(typeof(Text));
+        Object[] arrayObjects;
+        
+        arrayObjects = FindObjectsOfType(typeof(Text));
         foreach(Object obj in arrayObjects)
             objects.Add(obj);
 
+        arrayObjects = FindObjectsOfType(typeof(SkillNode));
+        foreach(Object obj in arrayObjects)
+            objects.Add(obj);
 
         // Verify if obj is a I18Entity and add to entity list
         string token = "";
@@ -43,9 +56,17 @@ public class I18NManager : MonoBehaviour
         {
             switch(obj) 
             {
-                case Text text:
+                case Text textComponent:
                     token = GetToken(((Text)obj).text);
                     entities.Add(new I18NEntity(obj, token));
+                break;
+
+                case SkillNode skillNodeComponent:
+                    token = GetToken(((SkillNode)obj).GetSkill().titleToken);
+                    entities.Add(new I18NEntity(obj, token, "title"));
+
+                    token = GetToken(((SkillNode)obj).GetSkill().descriptionToken);
+                    entities.Add(new I18NEntity(obj, token, "description"));
                 break;
             }
         }   
@@ -62,6 +83,13 @@ public class I18NManager : MonoBehaviour
                 {
                     case Text textComponent:
                         textComponent.text = translation;
+                    break;
+
+                    case SkillNode skillNodeComponent:
+                        if(entity.attribute == "title")
+                            skillNodeComponent.SetTitle(translation);
+                        else if(entity.attribute == "description")
+                            skillNodeComponent.SetDescription(translation);
                     break;
                 }
             }

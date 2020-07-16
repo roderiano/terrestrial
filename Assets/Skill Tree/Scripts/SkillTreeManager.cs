@@ -100,8 +100,8 @@ public class SkillTreeManager : MonoBehaviour
     // Refresh UI info
     public void RefreshInfo(SkillNode skillNode)
     {
-        title.text = selectedSkillNode.GetSkill().title;
-        description.text = selectedSkillNode.GetSkill().description;
+        title.text = selectedSkillNode.GetTitle();
+        description.text = selectedSkillNode.GetDescription();
 
         switch (skillNode.GetStatus())
         {

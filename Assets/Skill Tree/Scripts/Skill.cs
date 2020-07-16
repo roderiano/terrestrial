@@ -5,10 +5,9 @@ using UnityEngine.UI;
 public class Skill : ScriptableObject
 {
     [Header("Skill Info")]
-    public string title;
+    public string titleToken;
+    public string descriptionToken;
     public Image icon;
-    [TextArea]
-    public string description;
 
     [Header("Attributes Hability")]
     [Range(0, 10)]
@@ -25,5 +24,4 @@ public class Skill : ScriptableObject
 
     [Header("Special Hability")]
     public SkillSpecialHability specialHability = SkillSpecialHability.None;
-
 }

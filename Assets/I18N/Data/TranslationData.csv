@@ -1,3 +1,6 @@
 token;pt;en
-Color;Laranja;Orange
-Char;Nordico;Nordic
+skill.name.externalSoul;Alma Externa;External Soul
+skill.description.externalSoul;Skill de alma externa;Skill of external soul
+skill.name.savageSoul;Alma Selvagem;Savage Soul
+skill.description.savageSoul;Skill de alma selvagem;Skill of savage soul
+skillTree.title;ARVORE DE SKILL;SKILL TREE 
