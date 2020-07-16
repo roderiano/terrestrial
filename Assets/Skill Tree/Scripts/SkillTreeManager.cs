@@ -6,12 +6,12 @@ using UnityEngine.UI;
 public class SkillTreeManager : MonoBehaviour
 {
     [Header("Node Line Connection")]
-    [SerializeField] private Material lineMaterial;
+    [SerializeField] private Material lineMaterial = null;
     [Header("UI Components")]
-    [SerializeField] private GameObject contentUI;
-    [SerializeField] private Text title, description;
-    [SerializeField] private Image actionButtonImage;
-    [SerializeField] private Text actionButtonText;
+    [SerializeField] private GameObject contentUI = null;
+    [SerializeField] private Text title = null, description = null;
+    [SerializeField] private Image actionButtonImage = null;
+    [SerializeField] private Text actionButtonText = null;
 
     private SkillNode selectedSkillNode;
 

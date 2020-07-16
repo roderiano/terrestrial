@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class SkillNode : MonoBehaviour
 {
 
-    [SerializeField] private Skill skill;
+    [SerializeField] private Skill skill = null;
     [SerializeField] private SkillNodeStatus status = SkillNodeStatus.Blocked;
     private Image buttonImage;
 
