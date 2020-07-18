@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdafebf423cff1f47913faf6bae56dc4, type: 3}
   m_Name: External Soul
   m_EditorClassIdentifier: 
-  titleToken: token.skill.name.externalSoul
-  descriptionToken: token.skill.description.externalSoul
+  titleToken: skill.name.externalSoul
+  descriptionToken: skill.description.externalSoul
   icon: {fileID: 0}
   cost: 0
   speed: 0

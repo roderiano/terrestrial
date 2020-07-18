@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class SkillTreeManager : MonoBehaviour
@@ -8,22 +6,33 @@ public class SkillTreeManager : MonoBehaviour
     [Header("Node Line Connection")]
     [SerializeField] private Material lineMaterial = null;
     [Header("UI Components")]
-    [SerializeField] private GameObject contentUI = null;
-    [SerializeField] private Text title = null, description = null;
-    [SerializeField] private Image actionButtonImage = null;
+    
+    [SerializeField] private Text title = null;
+    [SerializeField] private Text description = null;
     [SerializeField] private Text actionButtonText = null;
+    [SerializeField] private Image actionButtonImage = null;
+    [SerializeField] private GameObject canvasTreeViewUI = null;
+
+    private GameObject contentUI = null;
+    
 
     private SkillNode selectedSkillNode;
 
     void Start()
     {
         // Configure line redenderes relation
+        contentUI = canvasTreeViewUI.transform.Find("Viewport/Content").gameObject;
         CreateLinesRelation();
     }
 
     void Update()
     {
         RefreshTreeSkill();
+
+        if(Input.GetKeyDown(KeyCode.Escape)) 
+        {
+            DisableSkillTree();
+        }
     }
 
     void CreateLinesRelation()
@@ -53,6 +62,7 @@ public class SkillTreeManager : MonoBehaviour
 
     void RefreshTreeSkill()
     {
+        GameObject contentUI = canvasTreeViewUI.transform.Find("Viewport/Content").gameObject;
         foreach (Transform child in contentUI.transform)
         {
             // Refresh skill status of children by status of root node
@@ -100,8 +110,9 @@ public class SkillTreeManager : MonoBehaviour
     // Refresh UI info
     public void RefreshInfo(SkillNode skillNode)
     {
-        title.text = selectedSkillNode.GetTitle();
-        description.text = selectedSkillNode.GetDescription();
+        I18NManager translatinManager = (I18NManager)FindObjectOfType(typeof(I18NManager));
+        title.text = translatinManager.GetTranslation(selectedSkillNode.GetSkill().titleToken);
+        description.text = translatinManager.GetTranslation(selectedSkillNode.GetSkill().descriptionToken);
 
         switch (skillNode.GetStatus())
         {
@@ -127,6 +138,16 @@ public class SkillTreeManager : MonoBehaviour
             selectedSkillNode.SetStatus(SkillNodeStatus.Adquired);
             RefreshInfo(selectedSkillNode);
         }
+    }
+
+    public void EnableSkillTree() 
+    {
+        canvasTreeViewUI.SetActive(true);
+    }
+
+    public void DisableSkillTree() 
+    {
+        canvasTreeViewUI.SetActive(false);
     }
 
 }

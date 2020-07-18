@@ -3,4 +3,8 @@ skill.name.externalSoul;Alma Externa;External Soul
 skill.description.externalSoul;Skill de alma externa;Skill of external soul
 skill.name.savageSoul;Alma Selvagem;Savage Soul
 skill.description.savageSoul;Skill de alma selvagem;Skill of savage soul
-skillTree.title;ARVORE DE SKILL;SKILL TREE 
+skillTree.title;ARVORE DE SKILL;SKILL TREE
+npc.shaman.dialog1;Ola;Hello
+npc.shaman.dialog2;Eu tenho algo para voce;I have something to you
+npc.shaman.dialog3;De uma olhada;Take a look
+npc.dialog.commandSkip;Pressione [ESPACO] para avancar;Press [SPACE] to skip

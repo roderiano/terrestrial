@@ -8,10 +8,6 @@ public class SkillNode : MonoBehaviour
 
     [SerializeField] private Skill skill = null;
     [SerializeField] private SkillNodeStatus status = SkillNodeStatus.Blocked;
-
-    private string title;
-    private string description;
-
     private Image buttonImage;
 
     private void Start()
@@ -53,22 +49,6 @@ public class SkillNode : MonoBehaviour
                 buttonImage.color = Color.red;
                 break;
         }
-    }
-
-    public string GetTitle() {
-        return title;
-    }
-
-    public string GetDescription() {
-        return description;
-    }
-
-    public void SetTitle(string title) {
-        this.title = title;
-    }
-
-    public void SetDescription(string description) {
-        this.description = description;
     }
 
 }

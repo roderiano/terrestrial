@@ -15,7 +15,7 @@ public class NodeLineConnectionRefresh : MonoBehaviour
     void Start()
     {
         // Set initial config for the line
-        lineWidth = 0.03f;
+        lineWidth = 0.5f;
         lineRenderer = gameObject.AddComponent<LineRenderer>();
         lineRenderer.material = lineMaterial;
         lineRenderer.startWidth = lineWidth;
