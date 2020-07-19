@@ -102,19 +102,19 @@ ScriptedImporter:
     internalID: 0
     spriteBone:
     - name: braco_R
-      position: {x: 65.449554, y: 259.16797, z: 0}
+      position: {x: 65.449554, y: 259.16803, z: 0}
       rotation: {x: 0, y: 0, z: 0.82145905, w: -0.57026756}
       length: 118.99743
       parentId: -1
     - name: antebraco_R
-      position: {x: 118.99741, y: -0.000018381383, z: 0}
+      position: {x: 118.99739, y: -0.00000920108, z: 0}
       rotation: {x: 0, y: 0, z: 0.6642268, w: 0.7475312}
-      length: 98.2368
+      length: 98.23681
       parentId: 0
     - name: mao_R
-      position: {x: 98.23678, y: -0.00002204488, z: 0}
-      rotation: {x: 0, y: 0, z: -0.048704345, w: 0.9988133}
-      length: 44.54161
+      position: {x: 98.23684, y: -0.000069122856, z: 0}
+      rotation: {x: 0, y: 0, z: -0.048704427, w: 0.9988132}
+      length: 44.541607
       parentId: 1
     spriteOutline: []
     vertices:
@@ -1167,17 +1167,17 @@ ScriptedImporter:
     - name: cintura
       position: {x: 153.04202, y: 66.30209, z: 0}
       rotation: {x: 0, y: 0, z: 0.69492173, w: 0.7190854}
-      length: 97.401886
+      length: 97.40195
       parentId: -1
     - name: cabeca
-      position: {x: 148.37967, y: 0.00001804969, z: 0}
+      position: {x: 148.37961, y: 0.00003327943, z: 0}
       rotation: {x: 0, y: 0, z: -0.13634592, w: 0.9906613}
       length: 158.2915
       parentId: 2
     - name: torso
-      position: {x: 97.40194, y: -0.000009930223, z: 0}
+      position: {x: 97.402, y: -0.000007844799, z: 0}
       rotation: {x: 0, y: 0, z: 0.047926873, w: 0.9988509}
-      length: 148.37978
+      length: 148.37971
       parentId: 0
     spriteOutline: []
     vertices:
@@ -1866,22 +1866,22 @@ ScriptedImporter:
     spriteID: fb1feb594964dd44594957ac14533750
     internalID: 0
     spriteBone:
-    - name: pe_L
-      position: {x: 196.15636, y: 0.0000026542293, z: 0}
-      rotation: {x: 0, y: 0, z: 0.7467164, w: 0.6651426}
-      length: 70.59824
+    - name: pe_R
+      position: {x: 196.15639, y: -0.00007251936, z: 0}
+      rotation: {x: 0, y: 0, z: 0.7467163, w: 0.6651428}
+      length: 70.59826
       parentId: 1
-    - name: canela_L
-      position: {x: 127.34337, y: -0.000028089788, z: 0}
-      rotation: {x: 0, y: 0, z: -0.20914367, w: 0.97788495}
-      length: 196.15639
+    - name: canela_R
+      position: {x: 127.343445, y: 0.000082177634, z: 0}
+      rotation: {x: 0, y: 0, z: -0.20914343, w: 0.977885}
+      length: 196.15642
       parentId: 2
-    - name: coxa_L
-      position: {x: 55.081787, y: 344.15002, z: 0}
-      rotation: {x: 0, y: 0, z: -0.6467846, w: 0.7626727}
-      length: 127.343445
-      parentId: -1
     - name: coxa_R
+      position: {x: 55.081787, y: 344.15002, z: 0}
+      rotation: {x: 0, y: 0, z: -0.6467848, w: 0.7626726}
+      length: 127.34346
+      parentId: -1
+    - name: coxa_L
       position: {x: 120.810394, y: 345.8141, z: 0}
       rotation: {x: 0, y: 0, z: -0.60000014, w: 0.79999995}
       length: 124.80124
@@ -2431,25 +2431,25 @@ ScriptedImporter:
     spriteID: b75fb0edb9429b84eaf0676560da475f
     internalID: 0
     spriteBone:
-    - name: pe_R
-      position: {x: 182.21725, y: -0.0000067515066, z: 0}
+    - name: pe_L
+      position: {x: 182.21732, y: -0.0000008990928, z: 0}
       rotation: {x: 0, y: 0, z: 0.72298974, w: 0.6908589}
       length: 65.81279
       parentId: 1
-    - name: canela_R
+    - name: canela_L
       position: {x: 124.80123, y: 0.0000325688, z: 0}
       rotation: {x: 0, y: 0, z: -0.18877402, w: 0.98202056}
-      length: 182.21729
+      length: 182.2173
       parentId: 2
-    - name: coxa_R
+    - name: coxa_L
       position: {x: 51.810394, y: 322.8141, z: 0}
       rotation: {x: 0, y: 0, z: -0.60000014, w: 0.79999995}
       length: 124.80124
       parentId: -1
-    - name: coxa_L
+    - name: coxa_R
       position: {x: -13.918228, y: 321.15002, z: 0}
-      rotation: {x: 0, y: 0, z: -0.6467846, w: 0.7626727}
-      length: 127.343445
+      rotation: {x: 0, y: 0, z: -0.6467848, w: 0.7626726}
+      length: 127.34346
       parentId: -1
     spriteOutline: []
     vertices:
@@ -2496,7 +2496,7 @@ ScriptedImporter:
     - position: {x: 121.578995, y: 41.606018}
       boneWeight:
         weight0: 0.9063806
-        weight1: 0.093619384
+        weight1: 0.093619406
         weight2: 0
         weight3: 0
         boneIndex0: 0
@@ -2936,7 +2936,7 @@ ScriptedImporter:
     - position: {x: 99.49245, y: 28.055115}
       boneWeight:
         weight0: 0.90857583
-        weight1: 0.091424175
+        weight1: 0.09142417
         weight2: 0
         weight3: 0
         boneIndex0: 0
@@ -3072,19 +3072,19 @@ ScriptedImporter:
     internalID: 0
     spriteBone:
     - name: mao_L
-      position: {x: 99.284775, y: 0.000052334253, z: 0}
-      rotation: {x: 0, y: 0, z: -0.22975364, w: 0.97324884}
-      length: 66.60213
+      position: {x: 99.28488, y: 0.000035582314, z: 0}
+      rotation: {x: 0, y: 0, z: -0.22975376, w: 0.97324884}
+      length: 66.60215
       parentId: 1
     - name: antebraco_L
-      position: {x: 118.28875, y: 0.000039364248, z: 0}
-      rotation: {x: 0, y: 0, z: 0.20839953, w: 0.9780438}
-      length: 99.284706
+      position: {x: 118.288734, y: -0.000041299383, z: 0}
+      rotation: {x: 0, y: 0, z: 0.20839956, w: 0.97804385}
+      length: 99.284805
       parentId: 2
     - name: braco_L
-      position: {x: 11.314392, y: 280.16797, z: 0}
-      rotation: {x: 0, y: 0, z: -0.6052763, w: 0.7960155}
-      length: 118.288734
+      position: {x: 11.314392, y: 280.16803, z: 0}
+      rotation: {x: 0, y: 0, z: -0.6052762, w: 0.7960156}
+      length: 118.28873
       parentId: -1
     spriteOutline: []
     vertices:
@@ -3959,20 +3959,20 @@ ScriptedImporter:
     spriteID: c7951c40be616c9409dd7d83d50f1c0d
     internalID: 0
     spriteBone:
-    - name: coxa_R
+    - name: coxa_L
       position: {x: -6.090606, y: -41.000412, z: 0}
       rotation: {x: 0, y: 0, z: -0.9873887, w: 0.15831514}
       length: 124.80124
       parentId: 2
-    - name: coxa_L
+    - name: coxa_R
       position: {x: -9.999486, y: 24.632977, z: 0}
-      rotation: {x: 0, y: 0, z: -0.9950912, w: 0.098962136}
-      length: 127.34346
+      rotation: {x: 0, y: 0, z: -0.99509126, w: 0.09896193}
+      length: 127.343445
       parentId: 2
     - name: cintura
       position: {x: 70.04202, y: 51.302124, z: 0}
       rotation: {x: 0, y: 0, z: 0.69492173, w: 0.7190854}
-      length: 97.401886
+      length: 97.40195
       parentId: -1
     spriteOutline: []
     vertices:
@@ -4385,15 +4385,15 @@ ScriptedImporter:
     - name: cintura
       position: {x: 221.04202, y: 464.3021, z: 0}
       rotation: {x: 0, y: 0, z: 0.69492173, w: 0.7190854}
-      length: 97.40188
+      length: 97.40194
       parentId: -1
     - name: torso
-      position: {x: 97.40191, y: -0.000018572158, z: 0}
+      position: {x: 97.40197, y: -0.000016486734, z: 0}
       rotation: {x: 0, y: 0, z: 0.04792687, w: 0.9988509}
-      length: 148.37978
+      length: 148.37971
       parentId: 0
     - name: cabeca
-      position: {x: 148.37975, y: 0.000022518969, z: 0}
+      position: {x: 148.37968, y: 0.00003774871, z: 0}
       rotation: {x: 0, y: 0, z: -0.13634592, w: 0.9906613}
       length: 158.2915
       parentId: 1
@@ -4403,57 +4403,57 @@ ScriptedImporter:
       length: 118.99744
       parentId: 1
     - name: antebraco_R
-      position: {x: 118.99744, y: -0.000025098027, z: 0}
-      rotation: {x: 0, y: 0, z: 0.6642268, w: 0.7475311}
+      position: {x: 118.99744, y: -0.000015917725, z: 0}
+      rotation: {x: 0, y: 0, z: 0.66422683, w: 0.7475311}
       length: 98.23681
       parentId: 3
     - name: mao_R
-      position: {x: 98.23681, y: -0.000006964776, z: 0}
-      rotation: {x: 0, y: 0, z: -0.04870438, w: 0.9988133}
+      position: {x: 98.23683, y: -0.00005086505, z: 0}
+      rotation: {x: 0, y: 0, z: -0.048704423, w: 0.9988133}
       length: 44.54161
       parentId: 4
     - name: braco_L
       position: {x: 89.19128, y: -40.52256, z: 0}
-      rotation: {x: 0, y: -0, z: -0.99455243, w: 0.10423748}
-      length: 118.28875
+      rotation: {x: 0, y: -0, z: -0.9945525, w: 0.1042376}
+      length: 118.28871
       parentId: 1
     - name: antebraco_L
-      position: {x: 118.28876, y: 0.000019813497, z: 0}
-      rotation: {x: 0, y: 0, z: 0.20839952, w: 0.9780438}
-      length: 99.28471
+      position: {x: 118.28874, y: 0.000009696096, z: 0}
+      rotation: {x: 0, y: 0, z: 0.2083995, w: 0.9780438}
+      length: 99.28479
       parentId: 6
     - name: mao_L
-      position: {x: 99.28479, y: 0.000038494123, z: 0}
-      rotation: {x: 0, y: 0, z: -0.22975366, w: 0.97324884}
+      position: {x: 99.28481, y: -0.000002936802, z: 0}
+      rotation: {x: 0, y: 0, z: -0.22975378, w: 0.97324884}
       length: 66.602135
       parentId: 7
-    - name: coxa_L
+    - name: coxa_R
       position: {x: -9.999559, y: 24.632969, z: 0}
-      rotation: {x: 0, y: -0, z: -0.9950912, w: 0.09896214}
-      length: 127.34345
+      rotation: {x: 0, y: -0, z: -0.99509126, w: 0.09896191}
+      length: 127.34344
       parentId: 0
-    - name: canela_L
-      position: {x: 127.34344, y: -0.000031323372, z: 0}
-      rotation: {x: 0, y: 0, z: -0.20914364, w: 0.97788495}
-      length: 196.15637
+    - name: canela_R
+      position: {x: 127.34341, y: 0.000030817162, z: 0}
+      rotation: {x: 0, y: 0, z: -0.2091434, w: 0.977885}
+      length: 196.15639
       parentId: 9
-    - name: pe_L
-      position: {x: 196.15639, y: 0.00000031426498, z: 0}
-      rotation: {x: 0, y: 0, z: 0.7467163, w: 0.66514266}
+    - name: pe_R
+      position: {x: 196.1564, y: -0.0000074121367, z: 0}
+      rotation: {x: 0, y: 0, z: 0.7467163, w: 0.6651428}
       length: 70.59826
       parentId: 10
-    - name: coxa_R
+    - name: coxa_L
       position: {x: -6.0907106, y: -41.00042, z: 0}
       rotation: {x: 0, y: -0, z: -0.9873887, w: 0.15831514}
       length: 124.80123
       parentId: 0
-    - name: canela_R
+    - name: canela_L
       position: {x: 124.80124, y: -0.000016969656, z: 0}
       rotation: {x: 0, y: 0, z: -0.18877408, w: 0.98202056}
-      length: 182.21729
+      length: 182.2173
       parentId: 12
-    - name: pe_R
-      position: {x: 182.21732, y: -0.0000059061877, z: 0}
+    - name: pe_L
+      position: {x: 182.21733, y: -0.000004443085, z: 0}
       rotation: {x: 0, y: 0, z: 0.72298974, w: 0.6908588}
       length: 65.8128
       parentId: 13
