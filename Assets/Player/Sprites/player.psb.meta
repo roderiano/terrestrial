@@ -1207,8 +1207,8 @@ ScriptedImporter:
     uvTransform: {x: 173, y: -390}
   - name: tronco
     originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
+    pivot: {x: 0.6165757, y: 0.24873987}
+    alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
