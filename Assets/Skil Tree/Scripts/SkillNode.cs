@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class SkillNode : MonoBehaviour
@@ -17,7 +15,7 @@ public class SkillNode : MonoBehaviour
 
     void Update()
     {
-        RefreshButtonColor();
+        RefreshButtonStyle();
     }
 
     public void SetStatus(SkillNodeStatus status)
@@ -35,8 +33,13 @@ public class SkillNode : MonoBehaviour
         return skill;
     }
 
-    void RefreshButtonColor()
+    void RefreshButtonStyle()
     {
+        I18NManager i18nManager = FindObjectOfType(typeof(I18NManager)) as I18NManager;
+        
+        Text titleNodeText = transform.Find("NodeButton/Title").GetComponent<Text>();
+        titleNodeText.text =  i18nManager.GetTranslation(skill.titleToken).ToUpper();
+        
         switch (GetStatus())
         {
             case SkillNodeStatus.Adquired:

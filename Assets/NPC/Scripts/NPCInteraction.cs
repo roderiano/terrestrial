@@ -18,7 +18,6 @@ public class NPCInteraction : MonoBehaviour
     private Text npcNameText;
     private Transform player;
     private I18NManager tranlationManager;
-    private GameObject commandNextDialogUI;
     private GameObject commandEnableDialogUI;
     
 
@@ -27,14 +26,13 @@ public class NPCInteraction : MonoBehaviour
         tranlationManager = (I18NManager)FindObjectOfType(typeof(I18NManager));    
         dialogText = dialogPanel.transform.Find("dialogText").GetComponent<Text>();
         npcNameText = dialogPanel.transform.Find("npcNameText").GetComponent<Text>();
-        commandNextDialogUI = commandsGroup.transform.Find("commandNextDialog").gameObject;
         commandEnableDialogUI = commandsGroup.transform.Find("commandEnableDialog").gameObject;
     }
     
     private void Update() 
     {
-        DialogController();
         DialogTrigger();
+        StartCoroutine(DialogController());
     }
 
     void DialogTrigger() 
@@ -45,7 +43,7 @@ public class NPCInteraction : MonoBehaviour
         if(distanceBetweenPlayerAndNPC < distanceToEnableDialog && !dialogActived)
         {
             commandEnableDialogUI.SetActive(true);
-            if(Input.GetKeyDown(KeyCode.E))
+            if(Input.GetKeyUp(KeyCode.E))
             {
                 EnableDialog();
             }
@@ -54,33 +52,34 @@ public class NPCInteraction : MonoBehaviour
             commandEnableDialogUI.SetActive(false);
     }
 
-    void DialogController()
+    IEnumerator DialogController()
     {
         if(dialogActived)
         {
             dialogText.text = tranlationManager.GetTranslation(dialogTokens[dialogCount]);
 
-            if(Input.GetKeyDown(KeyCode.Space))
+            if(Input.GetKeyUp(KeyCode.Space))
             {
                 if(dialogCount < dialogTokens.Count - 1)
                 {
                     dialogCount++;
                 } 
                 else
-                {
-                    DisableDialog();
-                    
+                {   
+                    dialogPanel.SetActive(false);
+
                     // Verify if enable something
                     if(interactionOption != NPCInteractionOption.None)
                     {
                         switch(interactionOption) {
                             case NPCInteractionOption.SkillTree:
                                SkillTreeManager skillTreeManager = (SkillTreeManager)FindObjectOfType(typeof(SkillTreeManager));
-                               skillTreeManager.EnableSkillTree();
+                               yield return skillTreeManager.EnableSkillTree();
                             break;
                         }
-                    }
-                    
+                    } 
+
+                    DisableDialog();
                 }
             }
                 
@@ -92,15 +91,11 @@ public class NPCInteraction : MonoBehaviour
         dialogCount = 0;
         dialogActived = true;
         dialogPanel.SetActive(true);
-        npcNameText.text = npcName;  
-        commandNextDialogUI.SetActive(true);
+        npcNameText.text = npcName.ToUpper();  
     }
 
     void DisableDialog() 
     {
-        dialogCount = 0;
         dialogActived = false;
-        dialogPanel.SetActive(false);
-        commandNextDialogUI.SetActive(false);
     }
 }

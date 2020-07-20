@@ -20,7 +20,6 @@ public class ArmsController : MonoBehaviour
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         
-        
-        spineTargetRoot.eulerAngles = riggedPlayer.rotation.y == 1 ? rotation.eulerAngles - new Vector3(0, 0, 180) : rotation.eulerAngles;
+        spineTargetRoot.eulerAngles = riggedPlayer.rotation.y == 1 ? rotation.eulerAngles : rotation.eulerAngles - new Vector3(0f, 0f, 180f);
     }
 }

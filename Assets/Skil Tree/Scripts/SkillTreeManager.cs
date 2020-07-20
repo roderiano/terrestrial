@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 public class SkillTreeManager : MonoBehaviour
 {
@@ -28,11 +29,6 @@ public class SkillTreeManager : MonoBehaviour
     void Update()
     {
         RefreshTreeSkill();
-
-        if(Input.GetKeyDown(KeyCode.Escape)) 
-        {
-            DisableSkillTree();
-        }
     }
 
     void CreateLinesRelation()
@@ -111,7 +107,7 @@ public class SkillTreeManager : MonoBehaviour
     public void RefreshInfo(SkillNode skillNode)
     {
         I18NManager translatinManager = (I18NManager)FindObjectOfType(typeof(I18NManager));
-        title.text = translatinManager.GetTranslation(selectedSkillNode.GetSkill().titleToken);
+        title.text = translatinManager.GetTranslation(selectedSkillNode.GetSkill().titleToken).ToUpper();
         description.text = translatinManager.GetTranslation(selectedSkillNode.GetSkill().descriptionToken);
 
         switch (skillNode.GetStatus())
@@ -140,13 +136,15 @@ public class SkillTreeManager : MonoBehaviour
         }
     }
 
-    public void EnableSkillTree() 
+    public IEnumerator EnableSkillTree() 
     {
         canvasTreeViewUI.SetActive(true);
-    }
+        
+        while(!Input.GetKeyDown(KeyCode.Escape)) 
+        {
+            yield return null;
+        }
 
-    public void DisableSkillTree() 
-    {
         canvasTreeViewUI.SetActive(false);
     }
 

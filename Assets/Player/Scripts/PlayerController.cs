@@ -17,9 +17,9 @@ public class PlayerController : MonoBehaviour
     private LayerMask playerLayer;
     private Rigidbody2D rb;
     private bool isGrounded;
+    private float horizontal;
     private float checkRadius;
     private Transform groundDetector;
-    private float horizontal;
 
     void Start()
     {
@@ -49,9 +49,9 @@ public class PlayerController : MonoBehaviour
         if(Time.timeScale != 0) 
         {
             if (aimHorizontalDirection > 0)
-                riggedPlayer.rotation = new Quaternion(0, 0, 0, 0);
+                riggedPlayer.rotation = new Quaternion(0f, 180f, 0f, 0f);
             else if (aimHorizontalDirection < 0)
-                riggedPlayer.rotation = new Quaternion(0, 180, 0, 0);
+                riggedPlayer.rotation = new Quaternion(0f, 0f, 0f, 0f);
         }
     }
     
