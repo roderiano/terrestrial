@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     private float horizontal;
     private float checkRadius;
     private Transform groundDetector;
+    private PlayerStatus playerStatus;
 
     void Start()
     {
@@ -31,12 +32,24 @@ public class PlayerController : MonoBehaviour
 
     void Update() 
     {
-        Time.timeScale = 1.0f;
+        JumpGravityController();
         horizontal = Input.GetAxisRaw("Horizontal");
 
-        DetectGround();
-        JumpController();
-        RotatePlayer();
+        if(playerStatus == PlayerStatus.Moving)
+        {
+            DetectGround();
+            Jump();
+            RotatePlayer();
+        }
+        
+    }
+
+    void FixedUpdate()
+    {
+        if(playerStatus == PlayerStatus.Moving)
+        {
+            Move();
+        }
     }
 
     void RotatePlayer() 
@@ -54,11 +67,6 @@ public class PlayerController : MonoBehaviour
                 riggedPlayer.rotation = new Quaternion(0f, 0f, 0f, 0f);
         }
     }
-    
-    void FixedUpdate()
-    {
-        Move();
-    }
 
     void Move() 
     {
@@ -70,13 +78,16 @@ public class PlayerController : MonoBehaviour
         isGrounded = Physics2D.OverlapCircle(groundDetector.position, checkRadius, ~(playerLayer));
     }
 
-    void JumpController() 
+    void Jump() 
     {
         if(isGrounded && Input.GetKeyDown(KeyCode.Space)) 
         {
             rb.velocity = Vector2.up * jumpForce;
         }
+    }
 
+    void JumpGravityController() 
+    {
         if(rb.velocity.y < 0) 
         {
             rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
@@ -85,5 +96,15 @@ public class PlayerController : MonoBehaviour
         {
              rb.velocity += Vector2.up * Physics2D.gravity.y * (jumpMultiplier - 1) * Time.deltaTime;   
         }
+    }
+
+    public void SetStatus(PlayerStatus playerStatus) 
+    {
+        this.playerStatus = playerStatus;
+    }
+
+    public PlayerStatus GetStatus() 
+    {
+        return playerStatus;
     }
 }

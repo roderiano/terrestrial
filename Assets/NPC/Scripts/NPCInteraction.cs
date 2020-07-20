@@ -19,6 +19,7 @@ public class NPCInteraction : MonoBehaviour
     private Transform player;
     private I18NManager tranlationManager;
     private GameObject commandEnableDialogUI;
+    private PlayerController playerController;
     
 
     private void Start() {
@@ -27,6 +28,7 @@ public class NPCInteraction : MonoBehaviour
         dialogText = dialogPanel.transform.Find("dialogText").GetComponent<Text>();
         npcNameText = dialogPanel.transform.Find("npcNameText").GetComponent<Text>();
         commandEnableDialogUI = commandsGroup.transform.Find("commandEnableDialog").gameObject;
+        playerController = (PlayerController)FindObjectOfType(typeof(PlayerController));
     }
     
     private void Update() 
@@ -92,10 +94,12 @@ public class NPCInteraction : MonoBehaviour
         dialogActived = true;
         dialogPanel.SetActive(true);
         npcNameText.text = npcName.ToUpper();  
+        playerController.SetStatus(PlayerStatus.Dialoguing);
     }
 
     void DisableDialog() 
     {
         dialogActived = false;
+        playerController.SetStatus(PlayerStatus.Moving);
     }
 }
