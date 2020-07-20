@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ArmsController : MonoBehaviour
 {
-    [SerializeField]private Transform spineTargetRoot; 
+    [SerializeField]private Transform spineTargetRoot = null; 
     
     private PlayerController playerController;
 

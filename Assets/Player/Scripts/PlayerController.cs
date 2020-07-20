@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     private float checkRadius;
     private Transform groundDetector;
     private PlayerStatus playerStatus;
+    private Animator animator;
 
     void Start()
     {
@@ -28,11 +29,13 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         playerLayer = LayerMask.NameToLayer("Player");
         groundDetector = transform.Find("groundDetector").transform;
+        animator = transform.Find("riggedPlayer/sprite").GetComponent<Animator>();
     }
 
     void Update() 
     {
         JumpGravityController();
+        
         horizontal = Input.GetAxisRaw("Horizontal");
 
         if(playerStatus == PlayerStatus.Moving)
@@ -40,16 +43,19 @@ public class PlayerController : MonoBehaviour
             DetectGround();
             Jump();
             RotatePlayer();
+            
+            animator.SetBool("isRunning", horizontal != 0 ? true : false);
+        }
+        else
+        {
+            animator.SetBool("isRunning", false);
         }
         
     }
 
     void FixedUpdate()
     {
-        if(playerStatus == PlayerStatus.Moving)
-        {
-            Move();
-        }
+        Move();
     }
 
     void RotatePlayer() 
@@ -70,7 +76,14 @@ public class PlayerController : MonoBehaviour
 
     void Move() 
     {
-        rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+        if(playerStatus == PlayerStatus.Moving)
+        {
+            rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+        } 
+        else
+        {
+            rb.velocity = new Vector2(0, rb.velocity.y); 
+        }
     }
 
     void DetectGround() 

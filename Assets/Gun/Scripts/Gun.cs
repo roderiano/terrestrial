@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
-    [SerializeField]private GameObject bulletPrefab;
+    [SerializeField]private GameObject bulletPrefab = null;
 
     private Transform shotPoint;
 
