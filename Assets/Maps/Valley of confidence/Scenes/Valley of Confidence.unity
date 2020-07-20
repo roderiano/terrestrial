@@ -571,7 +571,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 263.6848, y: -0.49446893}
+  m_AnchoredPosition: {x: 263.68478, y: -0.49446893}
   m_SizeDelta: {x: 263.68488, y: 206.58533}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &50035160
@@ -1200,10 +1200,10 @@ MonoBehaviour:
   m_ZDamping: 1
   m_TargetMovementOnly: 0
   m_ScreenX: 0.5
-  m_ScreenY: 0.5
+  m_ScreenY: 0.6
   m_CameraDistance: 10
-  m_DeadZoneWidth: 0
-  m_DeadZoneHeight: 0
+  m_DeadZoneWidth: 0.15
+  m_DeadZoneHeight: 0.07
   m_DeadZoneDepth: 0
   m_UnlimitedSoftZone: 0
   m_SoftZoneWidth: 0.8
@@ -2175,7 +2175,7 @@ MonoBehaviour:
   m_Follow: {fileID: 2018696660}
   m_Lens:
     FieldOfView: 60
-    OrthographicSize: 25
+    OrthographicSize: 18.25
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
@@ -2196,7 +2196,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1611428501}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -12.22, z: -10}
+  m_LocalPosition: {x: -0.0000019073486, y: -8.570001, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 774755406}
@@ -2303,7 +2303,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 25
+  orthographic size: 18.25
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -2327,7 +2327,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1644436465}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -12.22, z: -10}
+  m_LocalPosition: {x: -0.0000019073486, y: -8.570001, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1439818055}
@@ -2405,7 +2405,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -131.59998, y: -0.0056762695}
+  m_AnchoredPosition: {x: -131.59995, y: -0.0056762695}
   m_SizeDelta: {x: -263.25488, y: 206.09088}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1761590869
@@ -3455,8 +3455,8 @@ MonoBehaviour:
   - {fileID: 3546355284972385613}
   - {fileID: 2149532794741428840}
   m_Bounds:
-    m_Center: {x: 0.15645409, y: -0.40512013, z: 0}
-    m_Extent: {x: 1.5778978, y: 2.616802, z: 0}
+    m_Center: {x: 0.15440929, y: -0.39744306, z: 0}
+    m_Extent: {x: 1.5799426, y: 2.6091247, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
 --- !u!1 &1437773793623182856
@@ -3970,8 +3970,8 @@ MonoBehaviour:
   - {fileID: 4925741756761589599}
   - {fileID: 4801118731398844271}
   m_Bounds:
-    m_Center: {x: -0.30238128, y: -0.35156977, z: 0}
-    m_Extent: {x: 0.9411328, y: 1.6413984, z: 0}
+    m_Center: {x: -0.29609257, y: -0.36085582, z: 0}
+    m_Extent: {x: 0.93484396, y: 1.6506846, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
 --- !u!4 &3913936869921994084
@@ -4227,7 +4227,7 @@ MonoBehaviour:
   - {fileID: 4925741756761589599}
   - {fileID: 797611433924018438}
   m_Bounds:
-    m_Center: {x: -0.017994285, y: -0.36058652, z: 0}
+    m_Center: {x: -0.017994285, y: -0.36058658, z: 0}
     m_Extent: {x: 0.7501979, y: 0.40105265, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
@@ -4335,8 +4335,8 @@ MonoBehaviour:
   - {fileID: 4801118731398844271}
   - {fileID: 4925741756761589599}
   m_Bounds:
-    m_Center: {x: -0.18285388, y: -0.36613226, z: 0}
-    m_Extent: {x: 0.62411964, y: 1.7452636, z: 0}
+    m_Center: {x: -0.1595239, y: -0.38098025, z: 0}
+    m_Extent: {x: 0.6008939, y: 1.7601116, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
 --- !u!4 &6065620105449736174
@@ -4458,8 +4458,8 @@ MonoBehaviour:
   - {fileID: 4087535073883131980}
   - {fileID: 3086591895627394297}
   m_Bounds:
-    m_Center: {x: 1.0316215, y: 0.39416426, z: 0}
-    m_Extent: {x: 2.7739058, y: 0.72981685, z: 0}
+    m_Center: {x: 1.0316212, y: 0.3941639, z: 0}
+    m_Extent: {x: 2.7739055, y: 0.7298172, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
 --- !u!212 &6667792406152253148
@@ -4644,8 +4644,8 @@ MonoBehaviour:
   - {fileID: 9145315146966734864}
   - {fileID: 3030084446649154216}
   m_Bounds:
-    m_Center: {x: 0.7779714, y: 0.4755378, z: 0}
-    m_Extent: {x: 1.406745, y: 0.5279354, z: 0}
+    m_Center: {x: 0.7779714, y: 0.4755377, z: 0}
+    m_Extent: {x: 1.406745, y: 0.5279355, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
 --- !u!114 &7017193798995328091
