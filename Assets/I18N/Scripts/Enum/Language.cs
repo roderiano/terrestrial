@@ -1,5 +1,5 @@
 ﻿public enum Language
 {
-    Portuguese,
-    English
+    English,
+    Portuguese
 }

@@ -8,6 +8,6 @@ public class I18NText : MonoBehaviour
     void Start()
     {
         I18NManager translationManager = (I18NManager)FindObjectOfType(typeof(I18NManager));
-        GetComponent<Text>().text = translationManager.GetTranslation(token);
+        GetComponent<Text>().text = translationManager.GetTranslation(token); 
     }
 }

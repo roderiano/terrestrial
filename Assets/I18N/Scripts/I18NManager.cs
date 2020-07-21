@@ -1,17 +1,17 @@
 ﻿using UnityEngine;
 
-public class I18NManager : MonoBehaviour
+public class I18NManager : MonoBehaviour 
 {
-    void Start()
-    {
-        SetLanguage(Language.Portuguese);
-    }
+    private Language language;
 
+    private void Start() 
+    {
+        LoadLanguage();    
+    }
+    
     // Find translation in CSV
     public string GetTranslation(string token) 
     {
-        Language language = GetLanguage();
-
         string path = "Assets/I18N/Data/TranslationData.csv";
         string[] data = System.IO.File.ReadAllLines(path);
 
@@ -26,13 +26,25 @@ public class I18NManager : MonoBehaviour
         return null;        
     }
 
-    public void SetLanguage(Language language) 
+    public void SaveLanguage() 
     {
-        PlayerPrefs.SetInt("Language", (int)language);
+        SaveSystem.SaveI18NSettings(this);
+    }
+
+    public void LoadLanguage() 
+    {
+        I18NData data = SaveSystem.LoadI18NSettings();
+        language = data.language;
     }
 
     public Language GetLanguage() 
     {
-        return (Language)PlayerPrefs.GetInt("Language");
+        return language;
+    }
+
+    public void SetLanguage(Language language) 
+    {
+        this.language = language; 
+        SaveLanguage();
     }
 }
