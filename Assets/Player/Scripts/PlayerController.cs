@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -30,10 +29,18 @@ public class PlayerController : MonoBehaviour
         playerLayer = LayerMask.NameToLayer("Player");
         groundDetector = transform.Find("groundDetector").transform;
         animator = transform.Find("riggedPlayer/sprite").GetComponent<Animator>();
+
+        LoadGameTest();
     }
 
     void Update() 
     {
+        //REMOVER DEPOIS
+        if (Input.GetKeyDown(KeyCode.Tab))
+            SaveGameTest();
+        else if(Input.GetKeyDown(KeyCode.Escape))
+            SceneManager.LoadScene("Main Menu");
+
         JumpGravityController();
         
         horizontal = Input.GetAxisRaw("Horizontal");
@@ -119,5 +126,17 @@ public class PlayerController : MonoBehaviour
     public PlayerStatus GetStatus() 
     {
         return playerStatus;
+    }
+
+    private void SaveGameTest() 
+    {
+        SaveSystem.SavePlayerSettings(this.gameObject);
+    }
+
+     private void LoadGameTest() 
+    {
+        PlayerData data = SaveSystem.LoadPlayerSettings();
+        if(data != null)
+            transform.position = new Vector3(data.position[0], data.position[1], data.position[2]);
     }
 }

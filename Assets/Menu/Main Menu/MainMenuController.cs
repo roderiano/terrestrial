@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MainMenuController : MonoBehaviour
 {
@@ -36,5 +37,11 @@ public class MainMenuController : MonoBehaviour
         Debug.Log(i18nManager.GetLanguage());
 
         ActiveSettingsMenu();
+    }
+
+    public void LoadGame() 
+    {
+        PlayerData data = SaveSystem.LoadPlayerSettings();
+        SceneManager.LoadScene(data.scene);
     }
 }
