@@ -22,7 +22,7 @@ public class NodeLineConnectionRefresh : MonoBehaviour
         lineRenderer.endWidth = lineWidth;
         lineRenderer.positionCount = 2;
         nodesPoints = new Vector3[2];
-        lineRenderer.sortingOrder = 2000;
+        lineRenderer.sortingOrder = 5000;
     }
 
     void Update()
@@ -31,8 +31,8 @@ public class NodeLineConnectionRefresh : MonoBehaviour
         if (skill != null)
         {
             // Refresh start/end points of line connection
-            nodesPoints[0] = transform.position;
-            nodesPoints[1] = rootNode.transform.position;
+            nodesPoints[0] = transform.position - new Vector3(0f, 4f, 0);
+            nodesPoints[1] = rootNode.transform.position + new Vector3(0f, 3.5f, 0);
             lineRenderer.SetPositions(nodesPoints);
 
             // Refresh color of line by skill status

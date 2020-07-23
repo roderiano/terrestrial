@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
         //REMOVER DEPOIS
         if (Input.GetKeyDown(KeyCode.Tab))
             SaveGameTest();
-        else if(Input.GetKeyDown(KeyCode.Escape))
+        else if(Input.GetKeyDown(KeyCode.Escape) && playerStatus != PlayerStatus.Dialoguing)
             SceneManager.LoadScene("Main Menu");
 
         JumpGravityController();
