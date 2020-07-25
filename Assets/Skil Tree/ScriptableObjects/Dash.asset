@@ -10,14 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fdafebf423cff1f47913faf6bae56dc4, type: 3}
-  m_Name: Savage Soul
+  m_Name: Dash
   m_EditorClassIdentifier: 
-  titleToken: skill.name.savageSoul
-  descriptionToken: skill.description.savageSoul
-  icon: {fileID: 0}
+  titleToken: skill.name.dash
+  descriptionToken: skill.description.dash
+  icon: {fileID: 21300000, guid: 7247effaf6e6abc4dbd0c701253303d0, type: 3}
   cost: 0
-  speed: 2
-  health: 0
-  stealth: 1
-  vitality: 0
-  specialHability: 0
+  specialHability: 1

@@ -47,9 +47,8 @@ public class SkillNode : MonoBehaviour
     void RefreshButtonStyle()
     {
         I18NManager i18nManager = FindObjectOfType(typeof(I18NManager)) as I18NManager;
-        
-        // Text titleNodeText = transform.Find("NodeButton/Title").GetComponent<Text>();
-        // titleNodeText.text =  i18nManager.GetTranslation(skill.titleToken).ToUpper();
+        Image iconSkillNode = transform.Find("NodeButton/Icon").GetComponent<Image>();
+        iconSkillNode.sprite = skill.icon;
         
         switch (GetStatus())
         {

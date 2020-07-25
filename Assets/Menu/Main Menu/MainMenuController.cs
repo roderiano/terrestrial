@@ -4,8 +4,8 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuController : MonoBehaviour
 {
-    [SerializeField]GameObject mainMenu;
-    [SerializeField]GameObject settingsMenu;
+    [SerializeField]GameObject mainMenu = null;
+    [SerializeField]GameObject settingsMenu = null;
 
     private void ActiveSettingsMenu() 
     {

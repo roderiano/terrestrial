@@ -1,10 +1,11 @@
 token;en;pt
-skill.name.externalSoul;External Soul;Alma Externa
-skill.description.externalSoul;Skill of external soul;Skill de alma externa
-skill.name.savageSoul;Savage Soul;Alma Selvagem
-skill.description.savageSoul;Skill of savage soul;Skill de alma selvagem
-skillTree.title;SKILL TREE;ARVORE DE SKILL
-npc.shaman.dialog1;Hello;Ola
-npc.shaman.dialog2;I have something to you;Eu tenho algo para voce
-npc.shaman.dialog3;Take a look;De uma olhada
-npc.dialog.commandSkip;Press [SPACE] to skip;Pressione [ESPACO] para avancar
+skill.name.dash;Dash;Evasão
+skill.description.dash;Activates the dash ability by pressing the [C] key.;Ativa a habilidade de evasão ao pressionar a tecla [C].
+skill.name.doubleJump;Double Jump;Pulo Duplo
+skill.description.doubleJump;Active the ability of double jump.;Ativa a habilidade de pulo duplo.
+skillTree.title;SKILL TREE;ÁRVORE DE HABILIDADES
+npc.shaman.dialog1;Hello little guy.;Olá pequeno jovem.
+npc.shaman.dialog2;I have something to you!;Eu tenho algo para você!
+npc.shaman.dialog3;Take a look boy.;Dê uma olhada garoto.
+npc.dialog.commandNextDialog;Press [SPACE] to skip;Pressione [ESPACO] para avançar
+player.command.enableDialog;[E] to enable dialog;[E] para iniciar dialogo;
