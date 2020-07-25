@@ -1,5 +1,6 @@
 ﻿public enum PlayerStatus 
 {
     Moving,
-    Dialoguing
+    Dialoguing,
+    UsingAbility
 }

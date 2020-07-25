@@ -1,11 +1,12 @@
 ﻿using UnityEngine.SceneManagement;
+using System.Collections;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
 
     [Header("Movement Attributes")]
-    [SerializeField] private float speed = 13;
+    [SerializeField] private float speed = 13f;
     [Range(0, 10)]
     [SerializeField] private float fallMultiplier = 6f;
     [Range(0, 10)]
@@ -13,43 +14,53 @@ public class PlayerController : MonoBehaviour
     [Range(0, 50)]
     [SerializeField] private float jumpForce = 25f;
 
-    private LayerMask playerLayer;
+    
     private Rigidbody2D rb;
     private bool isGrounded;
     private float horizontal;
-    private float checkRadius;
-    private Transform groundDetector;
-    private PlayerStatus playerStatus;
     private Animator animator;
+    private float checkRadius;
+    private LayerMask layer;
+    private PlayerStatus status;
+    private Transform groundDetector;
+    private SkillTreeManager skillTreeManager;
+    
 
-    void Start()
+    private void Start()
     {
         checkRadius = 0.03f;
         rb = GetComponent<Rigidbody2D>();
-        playerLayer = LayerMask.NameToLayer("Player");
+        layer = LayerMask.NameToLayer("Player");
         groundDetector = transform.Find("groundDetector").transform;
         animator = transform.Find("riggedPlayer/sprite").GetComponent<Animator>();
+        skillTreeManager = FindObjectOfType(typeof(SkillTreeManager)) as SkillTreeManager;
 
-        LoadGameTest();
+        LoadPlayer();
     }
 
-    void Update() 
+    private void Update() 
     {
         //REMOVER DEPOIS
         if (Input.GetKeyDown(KeyCode.Tab))
-            SaveGameTest();
-        else if(Input.GetKeyDown(KeyCode.Escape) && playerStatus != PlayerStatus.Dialoguing)
+            SavePlayer();
+        else if(Input.GetKeyDown(KeyCode.Escape) && status != PlayerStatus.Dialoguing)
             SceneManager.LoadScene("Main Menu");
+        // ---
 
-        JumpGravityController();
+        GravityController();
         
         horizontal = Input.GetAxisRaw("Horizontal");
 
-        if(playerStatus == PlayerStatus.Moving)
+        if(status == PlayerStatus.Moving)
         {
-            DetectGround();
             Jump();
+            DetectGround();
             RotatePlayer();
+
+            if(Input.GetKeyDown(KeyCode.LeftShift) && skillTreeManager.SkillIsAdquired(SkillTypes.Dash)) 
+            {
+                StartCoroutine(Dash());
+            }
             
             animator.SetBool("isRunning", horizontal != 0 ? true : false);
         }
@@ -60,12 +71,12 @@ public class PlayerController : MonoBehaviour
         
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         Move();
     }
 
-    void RotatePlayer() 
+    private void RotatePlayer() 
     {
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Transform riggedPlayer = transform.Find("riggedPlayer");
@@ -81,24 +92,24 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void Move() 
+    private void Move() 
     {
-        if(playerStatus == PlayerStatus.Moving)
+        if(status == PlayerStatus.Moving)
         {
             rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
         } 
-        else
+        else if(status != PlayerStatus.UsingAbility) 
         {
             rb.velocity = new Vector2(0, rb.velocity.y); 
         }
     }
 
-    void DetectGround() 
+    private void DetectGround() 
     {
-        isGrounded = Physics2D.OverlapCircle(groundDetector.position, checkRadius, ~(playerLayer));
+        isGrounded = Physics2D.OverlapCircle(groundDetector.position, checkRadius, ~(layer));
     }
 
-    void Jump() 
+    private void Jump() 
     {
         if(isGrounded && Input.GetKeyDown(KeyCode.Space)) 
         {
@@ -106,7 +117,31 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void JumpGravityController() 
+    private IEnumerator Dash() 
+    {
+        float dir;
+        if(horizontal != 0)
+        {
+            dir = horizontal;
+        }
+        else
+        {
+            dir = transform.Find("riggedPlayer").rotation.y == 0 ? -1 : 1; 
+        }
+        
+        status = PlayerStatus.UsingAbility;
+        rb.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
+
+
+        rb.velocity = new Vector2(dir * 50f, 0f);
+
+        yield return new WaitForSeconds(0.2f);    
+        
+        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        status = PlayerStatus.Moving;
+    }
+
+    private void GravityController() 
     {
         if(rb.velocity.y < 0) 
         {
@@ -120,22 +155,22 @@ public class PlayerController : MonoBehaviour
 
     public void SetStatus(PlayerStatus playerStatus) 
     {
-        this.playerStatus = playerStatus;
+        this.status = playerStatus;
     }
 
     public PlayerStatus GetStatus() 
     {
-        return playerStatus;
+        return status;
     }
 
-    private void SaveGameTest() 
+    private void SavePlayer() 
     {
-        SaveSystem.SavePlayerSettings(this.gameObject);
+        SaveSystem.SavePlayer(this.gameObject);
     }
 
-     private void LoadGameTest() 
+    private void LoadPlayer() 
     {
-        PlayerData data = SaveSystem.LoadPlayerSettings();
+        PlayerData data = SaveSystem.LoadPlayer();
         if(data != null)
             transform.position = new Vector3(data.position[0], data.position[1], data.position[2]);
     }

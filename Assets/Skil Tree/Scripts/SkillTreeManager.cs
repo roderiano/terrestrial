@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
 
 public class SkillTreeManager : MonoBehaviour
 {
@@ -15,9 +16,8 @@ public class SkillTreeManager : MonoBehaviour
     [SerializeField] private GameObject canvasTreeViewUI = null;
 
     private GameObject contentUI = null;
-    
-
     private SkillNode selectedSkillNode;
+    private List<SkillTypes> adquiredSkills = new List<SkillTypes>();
 
     void Start()
     {
@@ -54,6 +54,11 @@ public class SkillTreeManager : MonoBehaviour
                 DrawLine(child);
             }
         }
+    }
+
+    public void AdquireSkillType(SkillTypes skillType) 
+    {
+        adquiredSkills.Add(skillType);
     }
 
     void RefreshTreeSkill()
@@ -146,6 +151,11 @@ public class SkillTreeManager : MonoBehaviour
         }
 
         canvasTreeViewUI.SetActive(false);
+    }
+
+    public bool SkillIsAdquired(SkillTypes type) 
+    {
+        return adquiredSkills.Contains(type);
     }
 
 }

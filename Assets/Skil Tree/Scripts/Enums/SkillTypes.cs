@@ -1,4 +1,4 @@
-﻿public enum SkillHability {
+﻿public enum SkillTypes {
     None,
     Dash,
     DoubleJump,

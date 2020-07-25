@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.EventSystems;
 
 public class SkillNode : MonoBehaviour
@@ -26,12 +26,7 @@ public class SkillNode : MonoBehaviour
     void Update()
     {
         RefreshButtonStyle();
-        AdquireSkill();
-    }
-
-    public void SetStatus(SkillNodeStatus status)
-    {
-        this.status = status;
+        AdquireSkillTrigger();
     }
 
     public SkillNodeStatus GetStatus()
@@ -78,8 +73,12 @@ public class SkillNode : MonoBehaviour
         skillTreeManager.SelectSkill(this);
     }
 
+    public void SetStatus(SkillNodeStatus status) 
+    {
+        this.status = status;
+    }
     
-    private void AdquireSkill()
+    private void AdquireSkillTrigger()
     {
         if(status == SkillNodeStatus.Available && buttonPressed)
         {
@@ -93,6 +92,7 @@ public class SkillNode : MonoBehaviour
             {
                 adquireCenter.fillAmount = 0;
                 SetStatus(SkillNodeStatus.Adquired);
+                skillTreeManager.AdquireSkillType(skill.type);
             }
                 
         }

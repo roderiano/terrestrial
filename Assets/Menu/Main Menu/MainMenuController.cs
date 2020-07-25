@@ -41,7 +41,7 @@ public class MainMenuController : MonoBehaviour
 
     public void LoadGame() 
     {
-        PlayerData data = SaveSystem.LoadPlayerSettings();
+        PlayerData data = SaveSystem.LoadPlayer();
         SceneManager.LoadScene(data.scene);
     }
 }

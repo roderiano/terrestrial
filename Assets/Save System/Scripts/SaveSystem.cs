@@ -36,7 +36,7 @@ public static class SaveSystem
         }
     }
 
-    public static void SavePlayerSettings(GameObject player)
+    public static void SavePlayer(GameObject player)
     {
         BinaryFormatter formatter = new BinaryFormatter();
         string path = Application.persistentDataPath + "/player.ter";
@@ -48,7 +48,7 @@ public static class SaveSystem
         stream.Close();
     }
 
-    public static PlayerData LoadPlayerSettings()
+    public static PlayerData LoadPlayer()
     {
         string path = Application.persistentDataPath + "/player.ter";
         if(File.Exists(path))

@@ -12,5 +12,5 @@ public class Skill : ScriptableObject
     [Header("Attributes Hability")]
     [Range(0, 10)]
     public int cost;
-    public SkillHability specialHability = SkillHability.None;
+    public SkillTypes type = SkillTypes.None;
 }
