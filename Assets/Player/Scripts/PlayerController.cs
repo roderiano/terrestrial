@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     [Range(0, 50)]
     [SerializeField] private float jumpForce = 25f;
 
+    [SerializeField] private int memoriesAmount = 0;
     
     private Rigidbody2D rb;
     private bool isGrounded;
@@ -57,7 +58,7 @@ public class PlayerController : MonoBehaviour
             DetectGround();
             RotatePlayer();
 
-            if(Input.GetKeyDown(KeyCode.LeftShift) && skillTreeManager.SkillIsAdquired(SkillTypes.Dash)) 
+            if(Input.GetKeyDown(KeyCode.LeftShift) && skillTreeManager.SkillIsAdquired(SkillType.Dash)) 
             {
                 StartCoroutine(Dash());
             }
@@ -165,13 +166,26 @@ public class PlayerController : MonoBehaviour
 
     private void SavePlayer() 
     {
-        SaveSystem.SavePlayer(this.gameObject);
+        SaveSystem.SavePlayer(this.gameObject, PlayerPrefs.GetString("Slot"));
     }
 
     private void LoadPlayer() 
     {
-        PlayerData data = SaveSystem.LoadPlayer();
+        PlayerData data = SaveSystem.LoadPlayer(PlayerPrefs.GetString("Slot"));
         if(data != null)
+        {
             transform.position = new Vector3(data.position[0], data.position[1], data.position[2]);
+            memoriesAmount = data.memories;
+        }  
+    }
+
+    public int GetMemoriesAmount()
+    {
+        return memoriesAmount;
+    }
+
+    public void AddMemories(int amount)
+    {
+        memoriesAmount += amount;
     }
 }

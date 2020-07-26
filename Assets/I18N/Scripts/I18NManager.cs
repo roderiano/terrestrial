@@ -34,7 +34,15 @@ public class I18NManager : MonoBehaviour
     public void LoadLanguage() 
     {
         I18NData data = SaveSystem.LoadI18NSettings();
-        language = data.language;
+        if(data != null)
+        {
+            language = data.language;
+        }
+        else
+        {
+            language = Language.English;
+        }
+        
     }
 
     public Language GetLanguage() 

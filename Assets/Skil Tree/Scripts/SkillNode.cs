@@ -14,6 +14,7 @@ public class SkillNode : MonoBehaviour
     private bool buttonPressed;
     private float fillAmount;
     private SkillTreeManager skillTreeManager;
+    private PlayerController playerController;
 
     private void Start()
     {
@@ -21,6 +22,7 @@ public class SkillNode : MonoBehaviour
         ledImage = transform.Find("NodeButton/Led").GetComponent<Image>();
         adquireCenter = transform.Find("NodeButton/AdquireCenter").GetComponent<Image>();
         skillTreeManager = FindObjectOfType(typeof(SkillTreeManager)) as SkillTreeManager;
+        playerController = FindObjectOfType(typeof(PlayerController)) as PlayerController;
     }
 
     void Update()
@@ -80,7 +82,7 @@ public class SkillNode : MonoBehaviour
     
     private void AdquireSkillTrigger()
     {
-        if(status == SkillNodeStatus.Available && buttonPressed)
+        if(status == SkillNodeStatus.Available && buttonPressed && skill.cost <= playerController.GetMemoriesAmount())
         {
             fillAmount += 0.01f * Time.deltaTime;
 
@@ -93,6 +95,7 @@ public class SkillNode : MonoBehaviour
                 adquireCenter.fillAmount = 0;
                 SetStatus(SkillNodeStatus.Adquired);
                 skillTreeManager.AdquireSkillType(skill.type);
+                playerController.AddMemories(-skill.cost);
             }
                 
         }

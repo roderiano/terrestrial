@@ -4,44 +4,80 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuController : MonoBehaviour
 {
-    [SerializeField]GameObject mainMenu = null;
-    [SerializeField]GameObject settingsMenu = null;
+    [SerializeField]GameObject main = null;
+    [SerializeField]GameObject settings = null;
+    [SerializeField]GameObject selectSlot = null;
 
-    private void ActiveSettingsMenu() 
+    public void ActiveSettingsScreen() 
     {
-        mainMenu.SetActive(false);
-        settingsMenu.SetActive(true);
+        main.SetActive(false);
+        settings.SetActive(true);
     }
 
-    private void ActiveMainMenu() 
+    public void ActiveMainScreen() 
     {
-        mainMenu.SetActive(true);
-        settingsMenu.SetActive(false);
+        main.SetActive(true);
+        settings.SetActive(false);
+        selectSlot.SetActive(false);
+    }
+
+    public void ActiveSelectSlotScreen() 
+    {
+        main.SetActive(false);
+        selectSlot.SetActive(true); 
+
+        for(int iSlot = 1; iSlot < 4; iSlot++)
+        {
+            Text gameNameText = selectSlot.transform.Find("Slot" + iSlot.ToString() + "/GameName").GetComponent<Text>();
+            PlayerData data = SaveSystem.LoadPlayer(iSlot.ToString());
+
+            
+            if(data != null)
+            {
+                gameNameText.text = data.scene;
+            }
+            else
+            {
+                gameNameText.text = "New Game";
+            }
+        }
+
     }
 
     public void SaveSettings() 
     {
         //Save language settings
         I18NManager i18nManager = FindObjectOfType(typeof(I18NManager)) as I18NManager;
-        Dropdown languageDropdown = settingsMenu.transform.Find("languageDropdown").GetComponent<Dropdown>();
+        Dropdown languageDropdown = settings.transform.Find("LanguageDropdown").GetComponent<Dropdown>();
         i18nManager.SetLanguage((Language)languageDropdown.value);
-        ActiveMainMenu();
+        ActiveMainScreen();
     }
 
-    public void LoadSetting() 
+    public void LoadSettings() 
     {
         //Load language settings
         I18NManager i18nManager = FindObjectOfType(typeof(I18NManager)) as I18NManager;
-        Dropdown languageDropdown = settingsMenu.transform.Find("languageDropdown").GetComponent<Dropdown>();
+        Dropdown languageDropdown = settings.transform.Find("LanguageDropdown").GetComponent<Dropdown>();
         languageDropdown.value = (int)i18nManager.GetLanguage(); 
-        Debug.Log(i18nManager.GetLanguage());
 
-        ActiveSettingsMenu();
+        ActiveSettingsScreen();
     }
 
-    public void LoadGame() 
+    public void LoadGame(string slot) 
     {
-        PlayerData data = SaveSystem.LoadPlayer();
-        SceneManager.LoadScene(data.scene);
+        PlayerPrefs.SetString("Slot", slot);
+
+        PlayerData data = SaveSystem.LoadPlayer(slot.ToString());
+        
+        if(data != null)
+        {
+            SceneManager.LoadScene(data.scene);
+        }
+        else
+        {
+            SceneManager.LoadScene("Valley of Confidence");
+        }
+        
     }
+    
 }

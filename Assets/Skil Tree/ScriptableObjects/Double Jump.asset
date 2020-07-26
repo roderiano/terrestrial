@@ -15,5 +15,5 @@ MonoBehaviour:
   titleToken: skill.name.doubleJump
   descriptionToken: skill.description.doubleJump
   icon: {fileID: 21300000, guid: ada2a29f46fa6724ba25f98957cb80b8, type: 3}
-  cost: 0
-  skillType: 2
+  cost: 4
+  type: 2
