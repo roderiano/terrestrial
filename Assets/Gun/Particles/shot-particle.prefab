@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7603758632092670416}
   - component: {fileID: 7603758632092670417}
   m_Layer: 0
-  m_Name: Particle System
+  m_Name: shot-particle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25,7 +25,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7603758632092670430}
-  m_LocalRotation: {x: -0.7071068, y: 0.00000008940697, z: -0.00000008940697, w: 0.7071068}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 27.882, y: -16.431, z: -2.17}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -40,8 +40,8 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7603758632092670430}
   serializedVersion: 6
-  lengthInSec: 0.5
-  simulationSpeed: 1
+  lengthInSec: 0.2
+  simulationSpeed: 2
   stopAction: 2
   cullingMode: 0
   ringBufferMode: 0
@@ -865,7 +865,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 10
+      scalar: 25
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -1541,7 +1541,7 @@ ParticleSystem:
     y:
       serializedVersion: 2
       minMaxState: 0
-      scalar: -1
+      scalar: 1
       minScalar: 0
       maxCurve:
         serializedVersion: 2
