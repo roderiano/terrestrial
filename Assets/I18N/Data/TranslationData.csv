@@ -9,3 +9,4 @@ npc.shaman.dialog2;I have something to you!;Eu tenho algo para você!
 npc.shaman.dialog3;Take a look boy.;Dê uma olhada garoto.
 npc.dialog.commandNextDialog;Press [SPACE] to skip;Pressione [ESPACO] para avançar
 player.command.enableDialog;[E] to enable dialog;[E] para iniciar dialogo;
+player.command.saveGame;[E] to save game;[E] para salvar o jogo;

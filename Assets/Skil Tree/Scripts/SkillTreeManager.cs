@@ -31,10 +31,6 @@ public class SkillTreeManager : MonoBehaviour
 
     void Update()
     {
-        //REMOVER DEPOIS
-        if (Input.GetKeyDown(KeyCode.Tab))
-            SaveSkillTree();
-
         RefreshTreeSkill();
     }
 
@@ -160,12 +156,12 @@ public class SkillTreeManager : MonoBehaviour
         return adquiredSkills.Contains(type);
     }
 
-    private void SaveSkillTree() 
+    public void SaveSkillTree() 
     {
         SaveSystem.SaveSkillTree(adquiredSkills, PlayerPrefs.GetString("Slot"));
     }
 
-    private void LoadSkillTree() 
+    public void LoadSkillTree() 
     {
         SkillTreeData data = SaveSystem.LoadSkillTree(PlayerPrefs.GetString("Slot"));
 

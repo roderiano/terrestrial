@@ -42,9 +42,7 @@ public class PlayerController : MonoBehaviour
     private void Update() 
     {
         //REMOVER DEPOIS
-        if (Input.GetKeyDown(KeyCode.Tab))
-            SavePlayer();
-        else if(Input.GetKeyDown(KeyCode.Escape) && status != PlayerStatus.Dialoguing)
+        if(Input.GetKeyDown(KeyCode.Escape) && status != PlayerStatus.Dialoguing)
             SceneManager.LoadScene("Main Menu");
         // ---
 
@@ -164,12 +162,12 @@ public class PlayerController : MonoBehaviour
         return status;
     }
 
-    private void SavePlayer() 
+    public void SavePlayer() 
     {
         SaveSystem.SavePlayer(this.gameObject, PlayerPrefs.GetString("Slot"));
     }
 
-    private void LoadPlayer() 
+    public void LoadPlayer() 
     {
         PlayerData data = SaveSystem.LoadPlayer(PlayerPrefs.GetString("Slot"));
         if(data != null)
