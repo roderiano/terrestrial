@@ -8,9 +8,9 @@ public class NPCInteraction : MonoBehaviour
     [SerializeField]private List<string> dialogTokens = new List<string>();
     [SerializeField]private string npcName = "";
     [SerializeField]private GameObject dialogPanel = null;
-    [SerializeField]private GameObject commandsGroup = null;
     [SerializeField]private float distanceToEnableDialog = 10;
     [SerializeField]private NPCInteractionOption interactionOption = NPCInteractionOption.None;
+    [SerializeField]private GameObject commandEnableDialogUI;
 
     private int dialogCount;
     private bool dialogActived;
@@ -18,16 +18,15 @@ public class NPCInteraction : MonoBehaviour
     private Text npcNameText;
     private Transform player;
     private I18NManager tranlationManager;
-    private GameObject commandEnableDialogUI;
+    
     private PlayerController playerController;
     
 
     private void Start() {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         tranlationManager = (I18NManager)FindObjectOfType(typeof(I18NManager));    
-        dialogText = dialogPanel.transform.Find("dialogText").GetComponent<Text>();
-        npcNameText = dialogPanel.transform.Find("npcNameText").GetComponent<Text>();
-        commandEnableDialogUI = commandsGroup.transform.Find("commandEnableDialog").gameObject;
+        dialogText = dialogPanel.transform.Find("DialogText").GetComponent<Text>();
+        npcNameText = dialogPanel.transform.Find("NpcNameText").GetComponent<Text>();
         playerController = (PlayerController)FindObjectOfType(typeof(PlayerController));
     }
     

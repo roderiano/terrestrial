@@ -5,12 +5,10 @@ using UnityEngine;
 public class Gun : MonoBehaviour
 {
     [SerializeField]private GameObject bulletPrefab = null;
-
-    private Transform shotPoint;
+    [SerializeField]private Transform shotPoint = null;
 
     void Start()
     {
-        shotPoint = transform.Find("ShotPoint");
     }
 
     void Update()
