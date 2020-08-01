@@ -56,7 +56,7 @@ public class ThrowerController : Enemy
     void LookTarget() 
     {
         float distance = body.position.x - target.position.x;
-        body.rotation = distance < 0 ? new Quaternion(0, 180, 0, 0) : new Quaternion(0, 0, 0, 0);
+        body.rotation = distance < 0 ? new Quaternion(0, 0, 0, 0) : new Quaternion(0, 180, 0, 0);
     }
 
     IEnumerator Escape()
@@ -110,7 +110,7 @@ public class ThrowerController : Enemy
         Vector2 direction = target.position - shotRoot.position;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        shotRoot.eulerAngles = rotation.eulerAngles - new Vector3(0f, 0f, 180f);
+        shotRoot.eulerAngles = rotation.eulerAngles;
 
         // Shot
         startTime = Time.time;

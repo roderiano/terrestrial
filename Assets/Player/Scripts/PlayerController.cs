@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpMultiplier = 5f;
     [Range(0, 50)]
     [SerializeField] private float jumpForce = 25f;
+    [Range(0, 10)]
+    [SerializeField] private int maxHealth;
 
     [SerializeField] private int memoriesAmount = 0;
     
@@ -25,6 +27,7 @@ public class PlayerController : MonoBehaviour
     private PlayerStatus status;
     private Transform groundDetector;
     private SkillTreeManager skillTreeManager;
+    private int health;
     
 
     private void Start()
@@ -35,6 +38,7 @@ public class PlayerController : MonoBehaviour
         groundDetector = transform.Find("groundDetector").transform;
         animator = transform.Find("riggedPlayer/sprite").GetComponent<Animator>();
         skillTreeManager = FindObjectOfType(typeof(SkillTreeManager)) as SkillTreeManager;
+        health = maxHealth;
 
         LoadPlayer();
     }
@@ -185,5 +189,27 @@ public class PlayerController : MonoBehaviour
     public void AddMemories(int amount)
     {
         memoriesAmount += amount;
+    }
+
+    public void TakeDamage()
+    {
+        health -= 1;
+        // Die();
+    }
+
+    private void Die() 
+    {
+        LoadLastSave();
+    }
+
+    public void LoadLastSave() 
+    {
+        Debug.Log(PlayerPrefs.GetString("Slot"));
+        PlayerData data = SaveSystem.LoadPlayer(PlayerPrefs.GetString("Slot"));
+        
+        if(data != null)
+        {
+            SceneManager.LoadScene(data.scene);
+        }
     }
 }
