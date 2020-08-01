@@ -1,5 +1,6 @@
 ﻿public enum EnemyStatus 
 {
     Idle,
-    Attacking
+    Attacking,
+    Moving
 }
