@@ -7,7 +7,7 @@ public class ThrowerController : Enemy
     [Header("General Settings")]
     [SerializeField]private Transform shotRoot;
     [SerializeField]private Transform reloadPoint;
-    [SerializeField]private Transform leftArmSolverTarget;
+    [SerializeField]private Transform armSolverTarget;
     [SerializeField]private GameObject projectilePrefab;
 
     [Header("Attack Settings")]
@@ -85,21 +85,21 @@ public class ThrowerController : Enemy
 
         // Reload
         startTime = Time.time;
-        center = ((leftArmSolverTarget.position + reloadPoint.position) * 0.5f) - new Vector3(0, 1, 0);
+        center = ((armSolverTarget.position + reloadPoint.position) * 0.5f) - new Vector3(0, 1, 0);
 
-        while(leftArmSolverTarget.position != reloadPoint.position)
+        while(armSolverTarget.position != reloadPoint.position)
         {
-            Vector3 targetCenter = leftArmSolverTarget.position - center;
+            Vector3 targetCenter = armSolverTarget.position - center;
             Vector3 reloadCenter = reloadPoint.position - center;
             float fracComplete = (Time.time - startTime) / reloadTime;
 
-            leftArmSolverTarget.position = Vector3.Slerp(targetCenter, reloadCenter, fracComplete * Time.deltaTime);
-            leftArmSolverTarget.position += center;
+            armSolverTarget.position = Vector3.Slerp(targetCenter, reloadCenter, fracComplete * Time.deltaTime);
+            armSolverTarget.position += center;
             yield return new WaitForEndOfFrame ();
         }
 
         //Instantiate projectile
-        GameObject projectile = Instantiate(projectilePrefab, leftArmSolverTarget.position, new Quaternion(0, 0, 0, 0));
+        GameObject projectile = Instantiate(projectilePrefab, armSolverTarget.position, new Quaternion(0, 0, 0, 0));
         Rigidbody2D projectileRigidbody = projectile.GetComponent<Rigidbody2D>();
         projectileRigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
 
@@ -114,25 +114,25 @@ public class ThrowerController : Enemy
 
         // Shot
         startTime = Time.time;
-        center = ((leftArmSolverTarget.position + reloadPoint.position) * 0.5f) - new Vector3(0, 1, 0);
-        while(leftArmSolverTarget.position != shotRoot.Find("ShotPoint").position)
+        center = ((armSolverTarget.position + reloadPoint.position) * 0.5f) - new Vector3(0, 1, 0);
+        while(armSolverTarget.position != shotRoot.Find("ShotPoint").position)
         {
             // Move arms
-            Vector3 targetCenter = leftArmSolverTarget.position - center;
+            Vector3 targetCenter = armSolverTarget.position - center;
             Vector3 shootCenter = shotRoot.Find("ShotPoint").position - center;
             float fracComplete = (Time.time - startTime) / attackTime;
 
-            leftArmSolverTarget.position = Vector3.Slerp(targetCenter, shootCenter, fracComplete * Time.deltaTime);
-            leftArmSolverTarget.position += center;
+            armSolverTarget.position = Vector3.Slerp(targetCenter, shootCenter, fracComplete * Time.deltaTime);
+            armSolverTarget.position += center;
             yield return new WaitForEndOfFrame ();
 
             // Move projectile
-            projectile.transform.position = leftArmSolverTarget.position;
+            projectile.transform.position = armSolverTarget.position;
         }
 
         // Set shoot velocity
         projectileRigidbody.constraints = RigidbodyConstraints2D.None;
-        projectileRigidbody.velocity = (leftArmSolverTarget.position - shotRoot.position).normalized * 50f;
+        projectileRigidbody.velocity = (armSolverTarget.position - shotRoot.position).normalized * 50f;
         projectile.GetComponent<EnemyProjectile>().isActive = true;
 
         SetStatus(EnemyStatus.Idle);
