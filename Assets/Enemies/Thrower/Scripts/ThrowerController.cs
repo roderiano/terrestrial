@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.U2D.IK;
 
 public class ThrowerController : Enemy
 {
@@ -13,16 +14,17 @@ public class ThrowerController : Enemy
     [Header("Attack Settings")]
     [SerializeField]private float reloadTime;
     [SerializeField]private float attackTime;
-    [SerializeField]private float attackDistance;
-
-    [Header("Move Settings")]
-    [SerializeField]private float speed;
+    [SerializeField]private float distanceToAttack;
     [SerializeField]private float distanceToEscape;
+    [SerializeField]private float attackForce;
+    [SerializeField]private float speed;
 
     private Transform body;
     private Transform target;
     private Transform actualMovePoint;
     private Transform[] movePoints = new Transform[2];
+    private float distanceBetweenTarget;
+    private Animator animator;
 
     void Start()
     {
@@ -32,47 +34,84 @@ public class ThrowerController : Enemy
         body = transform.Find("Body");
 
         actualMovePoint = movePoints[0];
+        animator = body.GetComponent<Animator>();
     }
 
     void Update()
     {   
-        float distanceBetweenTarget = Vector2.Distance(body.position, target.position);
+        distanceBetweenTarget = Vector2.Distance(body.position, target.position);
+        Debug.Log(distanceBetweenTarget);
         
-        if(GetStatus() == EnemyStatus.Idle)
+        if(GetStatus() != EnemyStatus.Attacking && distanceBetweenTarget > distanceToAttack)
         {
-            if(distanceBetweenTarget < distanceToEscape)
-            {
-                StartCoroutine(Escape());
-            }
-            else if(Physics2D.Linecast(shotRoot.Find("ShotPoint").position, target.transform.position) && distanceBetweenTarget < attackDistance)
-            {
-                LookTarget();
-                StartCoroutine(Attack());
-            }
+            StartCoroutine(GetDistanceToAttack());    
         }
-        
+        else  if(GetStatus() != EnemyStatus.Attacking && distanceBetweenTarget < distanceToEscape)
+        {
+            StartCoroutine(Escape());    
+        }
+        else if(GetStatus() == EnemyStatus.Idle && distanceBetweenTarget < distanceToAttack)
+        {
+            if(Physics2D.Linecast(shotRoot.Find("ShotPoint").position, target.transform.position))
+            {
+                StartCoroutine(Attack());
+            } 
+        }
     }
 
-    void LookTarget() 
+    void LookAtPoint(Transform point) 
     {
-        float distance = body.position.x - target.position.x;
+        float distance = body.position.x - point.position.x;
         body.rotation = distance < 0 ? new Quaternion(0, 0, 0, 0) : new Quaternion(0, 180, 0, 0);
+    }
+
+    IEnumerator GetDistanceToAttack()
+    {
+        SetStatus(EnemyStatus.Moving);
+        animator.SetBool("isGettingDistanceToAttack", true);
+
+        Rigidbody2D rb;
+        rb = body.GetComponent<Rigidbody2D>();
+
+        actualMovePoint = Vector2.Distance(movePoints[0].position, target.position) < Vector2.Distance(movePoints[1].position, target.position) ? movePoints[0] : movePoints[1];
+
+        while(Vector2.Distance(actualMovePoint.position, body.position) > 5f)
+        {
+            rb.MovePosition(body.position + (actualMovePoint.position - body.position).normalized * speed * Time.deltaTime);
+            yield return new WaitForEndOfFrame ();
+
+            LookAtPoint(actualMovePoint);
+            
+            if(distanceBetweenTarget > distanceToAttack - 5f)
+                break;
+        }
+
+        animator.SetBool("isGettingDistanceToAttack", false);
+        SetStatus(EnemyStatus.Idle);
     }
 
     IEnumerator Escape()
     {
         SetStatus(EnemyStatus.Moving);
+        animator.SetBool("isEscaping", true);
 
         Rigidbody2D rb;
         rb = body.GetComponent<Rigidbody2D>();
 
-        actualMovePoint = actualMovePoint == movePoints[0] ? movePoints[1] : movePoints[0];
-        while(Vector2.Distance(actualMovePoint.position, body.position) > 10f)
+        actualMovePoint = Vector2.Distance(movePoints[0].position, target.position) < Vector2.Distance(movePoints[1].position, target.position) ? movePoints[1] : movePoints[0];
+
+        while(Vector2.Distance(actualMovePoint.position, body.position) > 5f)
         {
             rb.MovePosition(body.position + (actualMovePoint.position - body.position).normalized * speed * Time.deltaTime);
             yield return new WaitForEndOfFrame ();
+
+            LookAtPoint(target);
+            
+            if(distanceBetweenTarget > distanceToAttack - 5f)
+                break;
         }
 
+        animator.SetBool("isEscaping", false);
         SetStatus(EnemyStatus.Idle);
     }
 
@@ -82,8 +121,10 @@ public class ThrowerController : Enemy
 
         float startTime = 0;
         Vector3 center = new Vector3(0, 0, 0);
+        LimbSolver2D limbSolver = armSolverTarget.GetComponent<LimbSolver2D>();
 
         // Reload
+        limbSolver.weight = 1;
         startTime = Time.time;
         center = ((armSolverTarget.position + reloadPoint.position) * 0.5f) - new Vector3(0, 1, 0);
 
@@ -95,16 +136,17 @@ public class ThrowerController : Enemy
 
             armSolverTarget.position = Vector3.Slerp(targetCenter, reloadCenter, fracComplete * Time.deltaTime);
             armSolverTarget.position += center;
+
             yield return new WaitForEndOfFrame ();
+
+            // Look to player
+            LookAtPoint(target);
         }
 
         //Instantiate projectile
         GameObject projectile = Instantiate(projectilePrefab, armSolverTarget.position, new Quaternion(0, 0, 0, 0));
         Rigidbody2D projectileRigidbody = projectile.GetComponent<Rigidbody2D>();
         projectileRigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
-
-        // Wait a time
-        yield return new WaitForSeconds(1.5f);
 
         // Set shot direction
         Vector2 direction = target.position - shotRoot.position;
@@ -132,9 +174,10 @@ public class ThrowerController : Enemy
 
         // Set shoot velocity
         projectileRigidbody.constraints = RigidbodyConstraints2D.None;
-        projectileRigidbody.velocity = (armSolverTarget.position - shotRoot.position).normalized * 50f;
+        projectileRigidbody.velocity = (armSolverTarget.position - shotRoot.position).normalized * attackForce;
         projectile.GetComponent<EnemyProjectile>().isActive = true;
 
+        limbSolver.weight = 0;
         SetStatus(EnemyStatus.Idle);
     }
 
