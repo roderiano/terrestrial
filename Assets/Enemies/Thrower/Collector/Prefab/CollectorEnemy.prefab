@@ -206,11 +206,12 @@ MonoBehaviour:
   projectilePrefab: {fileID: 8152946710522839468, guid: ac30c2874efa12e40a9e524e579531ae,
     type: 3}
   reloadTime: 0.02
-  attackTime: 0.01
+  attackTime: 0.002
   distanceToAttack: 30
   distanceToEscape: 10
   attackForce: 50
   speed: 30
+  intervalBetweenAttacks: 1
 --- !u!1 &1258063474099369971
 GameObject:
   m_ObjectHideFlags: 0

@@ -18,6 +18,7 @@ public class ThrowerController : Enemy
     [SerializeField]private float distanceToEscape;
     [SerializeField]private float attackForce;
     [SerializeField]private float speed;
+    [SerializeField]private float intervalBetweenAttacks;
 
     private Transform body;
     private Transform target;
@@ -40,7 +41,6 @@ public class ThrowerController : Enemy
     void Update()
     {   
         distanceBetweenTarget = Vector2.Distance(body.position, target.position);
-        Debug.Log(distanceBetweenTarget);
         
         if(GetStatus() != EnemyStatus.Attacking && distanceBetweenTarget > distanceToAttack)
         {
@@ -123,8 +123,14 @@ public class ThrowerController : Enemy
         Vector3 center = new Vector3(0, 0, 0);
         LimbSolver2D limbSolver = armSolverTarget.GetComponent<LimbSolver2D>();
 
+        // Set arm position
+        while(limbSolver.weight != 1f)
+        {
+            limbSolver.weight = Mathf.Lerp(1f, limbSolver.weight, 20f * Time.deltaTime);
+            yield return new WaitForEndOfFrame ();
+        }
+
         // Reload
-        limbSolver.weight = 1;
         startTime = Time.time;
         center = ((armSolverTarget.position + reloadPoint.position) * 0.5f) - new Vector3(0, 1, 0);
 
@@ -177,7 +183,15 @@ public class ThrowerController : Enemy
         projectileRigidbody.velocity = (armSolverTarget.position - shotRoot.position).normalized * attackForce;
         projectile.GetComponent<EnemyProjectile>().isActive = true;
 
-        limbSolver.weight = 0;
+        // Reset arm position
+        while(limbSolver.weight != 0f)
+        {
+            limbSolver.weight = Mathf.Lerp(0f, limbSolver.weight, 20f * Time.deltaTime);
+            yield return new WaitForEndOfFrame ();
+        }
+            
+
+        yield return new WaitForSeconds(intervalBetweenAttacks);
         SetStatus(EnemyStatus.Idle);
     }
 
