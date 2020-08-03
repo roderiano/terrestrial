@@ -119,34 +119,22 @@ public class ThrowerController : Enemy
     {
         SetStatus(EnemyStatus.Attacking);
 
+        float t = 0;
         float startTime = 0;
         Vector3 center = new Vector3(0, 0, 0);
         LimbSolver2D limbSolver = armSolverTarget.GetComponent<LimbSolver2D>();
 
-        // Set arm position
-        while(limbSolver.weight != 1f)
-        {
-            limbSolver.weight = Mathf.Lerp(1f, limbSolver.weight, 20f * Time.deltaTime);
-            yield return new WaitForEndOfFrame ();
-        }
-
         // Reload
-        startTime = Time.time;
-        center = ((armSolverTarget.position + reloadPoint.position) * 0.5f) - new Vector3(0, 1, 0);
+        armSolverTarget.position = reloadPoint.position;
 
-        while(armSolverTarget.position != reloadPoint.position)
-        {
-            Vector3 targetCenter = armSolverTarget.position - center;
-            Vector3 reloadCenter = reloadPoint.position - center;
-            float fracComplete = (Time.time - startTime) / reloadTime;
-
-            armSolverTarget.position = Vector3.Slerp(targetCenter, reloadCenter, fracComplete * Time.deltaTime);
-            armSolverTarget.position += center;
-
-            yield return new WaitForEndOfFrame ();
-
-            // Look to player
+        t = 0f;
+        while(limbSolver.weight < 0.99f)
+        { 
+            t += Time.deltaTime;
+            limbSolver.weight = Mathf.Lerp(limbSolver.weight, 1f, t);
             LookAtPoint(target);
+
+            yield return new WaitForEndOfFrame();
         }
 
         //Instantiate projectile
@@ -172,7 +160,7 @@ public class ThrowerController : Enemy
 
             armSolverTarget.position = Vector3.Slerp(targetCenter, shootCenter, fracComplete * Time.deltaTime);
             armSolverTarget.position += center;
-            yield return new WaitForEndOfFrame ();
+            yield return new WaitForEndOfFrame();
 
             // Move projectile
             projectile.transform.position = armSolverTarget.position;
@@ -184,10 +172,14 @@ public class ThrowerController : Enemy
         projectile.GetComponent<EnemyProjectile>().isActive = true;
 
         // Reset arm position
-        while(limbSolver.weight != 0f)
-        {
-            limbSolver.weight = Mathf.Lerp(0f, limbSolver.weight, 20f * Time.deltaTime);
-            yield return new WaitForEndOfFrame ();
+        t = 0f;
+        while(limbSolver.weight > 0.01f)
+        { 
+            t += Time.deltaTime;
+            limbSolver.weight = Mathf.Lerp(limbSolver.weight, 0f, t);
+            LookAtPoint(target);
+
+            yield return new WaitForEndOfFrame();
         }
             
 
