@@ -194,7 +194,7 @@ public class PlayerController : MonoBehaviour
     public void TakeDamage()
     {
         health -= 1;
-        // Die();
+        rb.velocity = Vector2.up * 10f;
     }
 
     private void Die() 
