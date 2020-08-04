@@ -169,6 +169,7 @@ public class ThrowerController : Enemy
         // Set shoot velocity
         projectileRigidbody.constraints = RigidbodyConstraints2D.None;
         projectileRigidbody.velocity = (armSolverTarget.position - shotRoot.position).normalized * attackForce;
+        projectileRigidbody.AddTorque(-180f);
         projectile.GetComponent<EnemyProjectile>().isActive = true;
 
         // Reset arm position
