@@ -81,18 +81,12 @@ public class PlayerController : MonoBehaviour
 
     private void RotatePlayer() 
     {
-        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Transform riggedPlayer = transform.Find("riggedPlayer");
-        
-        float aimHorizontalDirection = mousePosition.x - transform.position.x;
-        
-        if(Time.timeScale != 0) 
-        {
-            if (aimHorizontalDirection > 0)
-                riggedPlayer.rotation = new Quaternion(0f, 180f, 0f, 0f);
-            else if (aimHorizontalDirection < 0)
-                riggedPlayer.rotation = new Quaternion(0f, 0f, 0f, 0f);
-        }
+            
+        if (horizontal > 0)
+            riggedPlayer.rotation = new Quaternion(0f, 180f, 0f, 0f);
+        else if (horizontal < 0)
+            riggedPlayer.rotation = new Quaternion(0f, 0f, 0f, 0f);
     }
 
     private void Move() 
