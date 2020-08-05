@@ -65,11 +65,11 @@ public class PlayerController : MonoBehaviour
                 StartCoroutine(Dash());
             }
             
-            //animator.SetBool("isRunning", horizontal != 0 ? true : false);
+            animator.SetBool("isRunning", horizontal != 0 ? true : false);
         }
         else
         {
-            //animator.SetBool("isRunning", false);
+            animator.SetBool("isRunning", false);
         }
         
     }
@@ -108,11 +108,8 @@ public class PlayerController : MonoBehaviour
 
     private void Jump() 
     {
-        Debug.Log((rb.velocity.normalized + Vector2.up) * jumpForce);
         if(Input.GetKey(KeyCode.Space)) 
         {
-            //rb.velocity = Vector2.up * jumpForce;
-
             rb.velocity = (rb.velocity.normalized + Vector2.up) * jumpForce;
         }
     }
@@ -143,7 +140,6 @@ public class PlayerController : MonoBehaviour
 
     private void GravityController() 
     {
-        //Debug.Log(rb.velocity);
         if(rb.velocity.y < 0) 
         {
             rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier) * Time.deltaTime;
