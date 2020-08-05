@@ -7,9 +7,9 @@ public class PlayerController : MonoBehaviour
 
     [Header("Movement Attributes")]
     [SerializeField] private float speed = 13f;
-    [Range(0, 10)]
+    [Range(0, 50)]
     [SerializeField] private float fallMultiplier = 6f;
-    [Range(0, 10)]
+    [Range(0, 50)]
     [SerializeField] private float jumpMultiplier = 5f;
     [Range(0, 50)]
     [SerializeField] private float jumpForce = 25f;
@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         layer = LayerMask.NameToLayer("Player");
         groundDetector = transform.Find("groundDetector").transform;
-        animator = transform.Find("riggedPlayer/sprite").GetComponent<Animator>();
+        animator = transform.Find("playerWithIK").GetComponent<Animator>();
         skillTreeManager = FindObjectOfType(typeof(SkillTreeManager)) as SkillTreeManager;
         health = maxHealth;
 
@@ -65,11 +65,11 @@ public class PlayerController : MonoBehaviour
                 StartCoroutine(Dash());
             }
             
-            animator.SetBool("isRunning", horizontal != 0 ? true : false);
+            //animator.SetBool("isRunning", horizontal != 0 ? true : false);
         }
         else
         {
-            animator.SetBool("isRunning", false);
+            //animator.SetBool("isRunning", false);
         }
         
     }
@@ -81,12 +81,12 @@ public class PlayerController : MonoBehaviour
 
     private void RotatePlayer() 
     {
-        Transform riggedPlayer = transform.Find("riggedPlayer");
+        Transform body = transform.Find("playerWithIK");
             
         if (horizontal > 0)
-            riggedPlayer.rotation = new Quaternion(0f, 180f, 0f, 0f);
+            body.rotation = new Quaternion(0f, 0f, 0f, 0f);
         else if (horizontal < 0)
-            riggedPlayer.rotation = new Quaternion(0f, 0f, 0f, 0f);
+            body.rotation = new Quaternion(0f, 180f, 0f, 0f);
     }
 
     private void Move() 
@@ -108,9 +108,12 @@ public class PlayerController : MonoBehaviour
 
     private void Jump() 
     {
-        if(isGrounded && Input.GetKeyDown(KeyCode.Space)) 
+        Debug.Log((rb.velocity.normalized + Vector2.up) * jumpForce);
+        if(Input.GetKey(KeyCode.Space)) 
         {
-            rb.velocity = Vector2.up * jumpForce;
+            //rb.velocity = Vector2.up * jumpForce;
+
+            rb.velocity = (rb.velocity.normalized + Vector2.up) * jumpForce;
         }
     }
 
@@ -130,7 +133,7 @@ public class PlayerController : MonoBehaviour
         rb.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
 
 
-        rb.velocity = new Vector2(dir * 50f, 0f);
+        rb.velocity = new Vector2(dir * 50f, rb.velocity.y);
 
         yield return new WaitForSeconds(0.2f);    
         
@@ -140,13 +143,14 @@ public class PlayerController : MonoBehaviour
 
     private void GravityController() 
     {
+        //Debug.Log(rb.velocity);
         if(rb.velocity.y < 0) 
         {
-            rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
+            rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier) * Time.deltaTime;
         }
         else if(rb.velocity.y > 0) 
         {
-             rb.velocity += Vector2.up * Physics2D.gravity.y * (jumpMultiplier - 1) * Time.deltaTime;   
+             rb.velocity += Vector2.up * Physics2D.gravity.y * (jumpMultiplier) * Time.deltaTime;   
         }
     }
 
@@ -188,7 +192,7 @@ public class PlayerController : MonoBehaviour
     public void TakeDamage()
     {
         health -= 1;
-        rb.velocity = Vector2.up * 10f;
+        //rb.velocity = Vector2.up * 10f;
     }
 
     private void Die() 
