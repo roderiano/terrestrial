@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpForce = 25f;
     [Range(0, 10)]
     [SerializeField] private int maxHealth;
+    [Range(0.0f, 1f)]
+    [SerializeField] private float jumpMaxTime;
 
     [SerializeField] private int memoriesAmount = 0;
     
@@ -50,15 +52,18 @@ public class PlayerController : MonoBehaviour
             SceneManager.LoadScene("Main Menu");
         // ---
 
+        DetectGround();
+        RotatePlayer();
         GravityController();
         
         horizontal = Input.GetAxisRaw("Horizontal");
 
         if(status == PlayerStatus.Moving)
         {
-            Jump();
-            DetectGround();
-            RotatePlayer();
+            if(Input.GetKeyDown(KeyCode.Space)) 
+            {
+                StartCoroutine(Jump());  
+            }
 
             if(Input.GetKeyDown(KeyCode.LeftShift) && skillTreeManager.SkillIsAdquired(SkillType.Dash)) 
             {
@@ -91,7 +96,7 @@ public class PlayerController : MonoBehaviour
 
     private void Move() 
     {
-        if(status == PlayerStatus.Moving)
+        if(status == PlayerStatus.Moving || status == PlayerStatus.Jumping)
         {
             rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
         } 
@@ -106,12 +111,26 @@ public class PlayerController : MonoBehaviour
         isGrounded = Physics2D.OverlapCircle(groundDetector.position, checkRadius, ~(layer));
     }
 
-    private void Jump() 
+    private IEnumerator Jump() 
     {
-        if(Input.GetKey(KeyCode.Space)) 
+        status = PlayerStatus.Jumping; 
+
+        float startTime = Time.time;
+        Debug.Log(startTime);
+
+        while(!Input.GetKeyUp(KeyCode.Space))
         {
             rb.velocity = (rb.velocity.normalized + Vector2.up) * jumpForce;
+            
+            if(Time.time - startTime > jumpMaxTime)
+            {
+                break;
+            }
+
+            yield return null;
         }
+
+        status = PlayerStatus.Moving;
     }
 
     private IEnumerator Dash() 

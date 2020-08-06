@@ -2,5 +2,6 @@
 {
     Moving,
     Dialoguing,
-    UsingAbility
+    UsingAbility,
+    Jumping
 }

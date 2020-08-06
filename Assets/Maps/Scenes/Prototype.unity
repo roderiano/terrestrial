@@ -1047,6 +1047,11 @@ PrefabInstance:
       propertyPath: memoriesAmount
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 1366231361679105895, guid: f69c9f5c6f06d8c48b0b27dae2c9f091,
+        type: 3}
+      propertyPath: jumpMaxTime
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 3954483602465283412, guid: f69c9f5c6f06d8c48b0b27dae2c9f091,
         type: 3}
       propertyPath: m_LocalPosition.x
