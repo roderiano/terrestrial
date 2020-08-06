@@ -76,6 +76,10 @@ public class PlayerController : MonoBehaviour
         {
             animator.SetBool("isRunning", false);
         }
+
+        if(Input.GetKeyDown(KeyCode.X)){
+            StartCoroutine(Attack());
+        }
         
     }
 
@@ -155,6 +159,12 @@ public class PlayerController : MonoBehaviour
         
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         status = PlayerStatus.Moving;
+    }
+
+    private IEnumerator Attack() {
+        animator.SetBool("isAttacking", true);
+        yield return new WaitForSeconds(0.3f);
+        animator.SetBool("isAttacking", false); 
     }
 
     private void GravityController() 
